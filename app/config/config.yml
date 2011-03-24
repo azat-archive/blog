@@ -1,6 +1,8 @@
 imports:
     - { resource: parameters.ini }
-#    - { resource: security.yml }
+    - { resource: "@BlogWebBundle/Resources/config/menu.xml" }
+    - { resource: "@BlogWebBundle/Resources/config/event_dispatcher.xml" }
+    - { resource: security.yml }
 
 framework:
     charset:       UTF-8
@@ -32,11 +34,11 @@ doctrine:
         default_connection: default
         connections:
             default:
-                driver:   %database_driver%
-                host:     %database_host%
-                dbname:   %database_name%
-                user:     %database_user%
-                password: %database_password%
+                driver:        pdo_mysql
+                unix_socket:   /var/run/mysqld/mysqld.sock
+                dbname:        blog
+                user:          azat
+                password:      utf8
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -44,7 +46,8 @@ doctrine:
         entity_managers:
             default:
                 mappings:
-                    AcmeDemoBundle: ~
+                    BlogWebBundle: ~
+                query_cache_driver: xcache
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -52,3 +55,7 @@ swiftmailer:
     host:       %mailer_host%
     username:   %mailer_user%
     password:   %mailer_password%
+
+# Menu
+knplabs_menu:
+    twig: true

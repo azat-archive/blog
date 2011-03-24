@@ -3,4 +3,5 @@ app/bootstrap*
 app/cache/*
 app/logs/*
 build/
-vendor/
+#vendor/
+/nbproject/private/

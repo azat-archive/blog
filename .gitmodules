@@ -1,0 +1,3 @@
+[submodule "src/Knplabs/MenuBundle"]
+	path = src/Knplabs/MenuBundle
+	url = https://github.com/azat/MenuBundle.git

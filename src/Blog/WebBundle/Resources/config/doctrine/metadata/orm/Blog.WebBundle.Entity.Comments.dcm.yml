@@ -1,0 +1,23 @@
+Blog\WebBundle\Entity\Comments:
+  type: entity
+  table: comments
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    content:
+      type: text
+      nullable: false
+    uid:
+      type: integer
+      unsigned: false
+      nullable: false
+    pid:
+      type: integer
+      unsigned: false
+      nullable: false
+  lifecycleCallbacks: {  }
