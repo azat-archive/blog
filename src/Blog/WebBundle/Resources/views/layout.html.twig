@@ -17,20 +17,24 @@
 		</div>
 		
 		<div id="wrapper">
+			{% if error is defined %}
+			<div class="error"><h4>{{ error }}</h4></div>
+			{% endif %}
+			
 			{% if app.session.flash('notice') %}
 			<div class="flash-message">
 				<em>Notice</em>: {{ app.session.flash('notice') }}
 			</div>
 			{% endif %}
 
-			<div class="symfony-content">
+			<div class="content">
 			{% block content %}
 			{% endblock %}
 			</div>
 
 			{% if code is defined %}
 			<h2>Code behind this page</h2>
-			<div class="symfony-content">{{ code|raw }}</div>
+			<div class="code-content">{{ code|raw }}</div>
 			{% endif %}
 		</div>
 	</body>

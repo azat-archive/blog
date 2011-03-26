@@ -18,13 +18,14 @@ use	Symfony\Component\Form\Form,
 
 use	Symfony\Component\Validator\Constraints\EmailValidator;
 
-class UsersLoginForm extends Form {
+class UsersLogin extends Form {
 	public $email;
 	public $password;
+	public $remember;
 	
 	
 	public function configure() {
-		$this->setDataClass('Blog\\WebBundle\\Entity\\Users');
+		$this->setDataClass('Blog\\WebBundle\\Request\\UsersLogin');
 		
 		$this->add('email');
 		$this->add(new PasswordField('password'));

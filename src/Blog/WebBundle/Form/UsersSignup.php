@@ -20,7 +20,7 @@ use	Symfony\Component\Form\Form,
 
 use	Symfony\Component\Validator\Constraints\EmailValidator;
 
-class UsersSignupForm extends Form {
+class UsersSignup extends Form {
 	public $email;
 	public $login;
 	// public $birthday;

@@ -1,13 +1,10 @@
 security:
-    acl:
-  
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Blog\WebBundle\Entity\Users: sha1
 
     providers:
-        in_memory:
-            users:
-                admin: { password: pa$$word, roles: [ 'ROLE_USER' ] }
+        main:
+            entity: { class: BlogWebBundle:Users, property: email } 
 
     firewalls:
         profiler:
@@ -22,19 +19,18 @@ security:
             pattern:     /_configurator.*
             security:    false
 
-        web_login_or_signup:
-            pattern:      (?:/users/login|/users/signup)
-            form_login:  false
-            security:    false
-
         web_main:
-            pattern:     (?!/users/(?:login|signup)).*
-            logout:      { path: /users/logout, target: /users/login }
+            pattern:     (?!/users/signup|/users/login).*
+            logout:      { path: /logout, target: /users/login }
             form_login:
-                check_path:                     /users/login
+                check_path:                     /login_check
                 login_path:                     /users/login
-                failure_path:                   null
+                failure_path:                   /users/login
+                remember_me:                    true
+                post_only:                      true
                 always_use_default_target_path: false
                 default_target_path:            /
                 target_path_parameter:          _target_path
                 use_referer:                    true
+                username_parameter:             users_login[email]
+                password_parameter:             users_login[password]

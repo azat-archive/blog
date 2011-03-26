@@ -1,7 +1,7 @@
 {% extends "BlogWebBundle::layout.html.twig" %}
 
 {% block content %}
-    <form action="" method="POST">
+    <form action="/login_check{# @TODO dynamic path #}" method="POST">
         {{ form_field(form) }}
         <input type="submit" value="Send" />
     </form>

@@ -27,5 +27,8 @@ class MainMenu extends Menu {
 		$this->setCurrentUri($request->getRequestUri());
 		
 		$this->addChild('Home', $router->generate('_index'));
+		$this->addChild('Signup', $router->generate('_users_signup'));
+		$this->addChild('Login / Signin', $router->generate('_users_login'));
+		$this->addChild('Logout', '/logout'); // @TODO generate url dynamicly
 	}
 }

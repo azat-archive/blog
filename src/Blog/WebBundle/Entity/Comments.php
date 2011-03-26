@@ -8,110 +8,98 @@ namespace Blog\WebBundle\Entity;
  * @orm:Table(name="comments")
  * @orm:Entity
  */
-class Comments
-{
-    /**
-     * @var integer $id
-     *
-     * @orm:Column(name="id", type="integer", nullable=false)
-     * @orm:Id
-     * @orm:GeneratedValue(strategy="IDENTITY")
-     * @validation:Int()
-     */
-    private $id;
+class Comments {
+	/**
+	 * @var integer $id
+	 *
+	 * @orm:Column(name="id", type="integer", nullable=false)
+	 * @orm:Id
+	 * @orm:GeneratedValue(strategy="IDENTITY")
+	 * @validation:Int()
+	 */
+	private $id;
+	/**
+	 * @var text $content
+	 *
+	 * @orm:Column(name="content", type="text", nullable=false)
+	 * @validation:NotBlank()
+	 */
+	private $content;
+	/**
+	 * @var integer $uid
+	 *
+	 * @orm:Column(name="uid", type="integer", nullable=false)
+	 * @validation:Int()
+	 */
+	private $uid;
+	/**
+	 * @var integer $pid
+	 *
+	 * @orm:Column(name="pid", type="integer", nullable=false)
+	 * @validation:Int()
+	 */
+	private $pid;
 
-    /**
-     * @var text $content
-     *
-     * @orm:Column(name="content", type="text", nullable=false)
-     * @validation:NotBlank()
-     */
-    private $content;
+	/**
+	 * Get id
+	 *
+	 * @return integer $id
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * @var integer $uid
-     *
-     * @orm:Column(name="uid", type="integer", nullable=false)
-     * @validation:Int()
-     */
-    private $uid;
+	/**
+	 * Set content
+	 *
+	 * @param text $content
+	 */
+	public function setContent($content) {
+		$this->content = $content;
+	}
 
-    /**
-     * @var integer $pid
-     *
-     * @orm:Column(name="pid", type="integer", nullable=false)
-     * @validation:Int()
-     */
-    private $pid;
+	/**
+	 * Get content
+	 *
+	 * @return text $content
+	 */
+	public function getContent() {
+		return $this->content;
+	}
 
+	/**
+	 * Set uid
+	 *
+	 * @param integer $uid
+	 */
+	public function setUid($uid) {
+		$this->uid = $uid;
+	}
 
-    /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * Get uid
+	 *
+	 * @return integer $uid
+	 */
+	public function getUid() {
+		return $this->uid;
+	}
 
-    /**
-     * Set content
-     *
-     * @param text $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
+	/**
+	 * Set pid
+	 *
+	 * @param integer $pid
+	 */
+	public function setPid($pid) {
+		$this->pid = $pid;
+	}
 
-    /**
-     * Get content
-     *
-     * @return text $content
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Set uid
-     *
-     * @param integer $uid
-     */
-    public function setUid($uid)
-    {
-        $this->uid = $uid;
-    }
-
-    /**
-     * Get uid
-     *
-     * @return integer $uid
-     */
-    public function getUid()
-    {
-        return $this->uid;
-    }
-
-    /**
-     * Set pid
-     *
-     * @param integer $pid
-     */
-    public function setPid($pid)
-    {
-        $this->pid = $pid;
-    }
-
-    /**
-     * Get pid
-     *
-     * @return integer $pid
-     */
-    public function getPid()
-    {
-        return $this->pid;
-    }
+	/**
+	 * Get pid
+	 *
+	 * @return integer $pid
+	 */
+	public function getPid() {
+		return $this->pid;
+	}
 }
