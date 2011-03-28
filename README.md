@@ -7,7 +7,7 @@ What's inside?
 Configuration
 --------------
 
-	For apache
+For apache
 
 	<VirtualHost 127.0.0.1:80>
 		Options +FollowSymLinks
