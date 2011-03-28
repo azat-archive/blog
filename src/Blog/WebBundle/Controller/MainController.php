@@ -18,10 +18,10 @@ use Blog\Bundle\Form;
 
 class MainController extends Controller {
 	/**
-	 * @extra:Route("/", name="_main_index")
 	 * @extra:Route("/", name="_index")
+	 * @extra:Template()
 	 */
 	public function indexAction() {
-		return $this->render('BlogWebBundle:Main:index.html.twig');
+		return array();
 	}
 }

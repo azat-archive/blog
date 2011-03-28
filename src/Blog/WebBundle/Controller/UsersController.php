@@ -19,9 +19,7 @@ use	Symfony\Bundle\FrameworkBundle\Controller\Controller,
 use	Blog\WebBundle\Form\UsersSignup as UsersSignupForm,
 	Blog\WebBundle\Form\UsersLogin as UsersLoginForm,
 	Blog\WebBundle\Request\UsersLogin as UsersLoginRequest,
-	Blog\WebBundle\Entity\Users,
-	Symfony\Component\Validator\Constraints\Email,
-	Symfony\Component\Validator\Constraints\EmailValidator;
+	Blog\WebBundle\Entity\Users;
 
 class UsersController extends Controller {
       /**
@@ -31,6 +29,7 @@ class UsersController extends Controller {
 	
 	/**
 	 * @extra:Route("/users/signup", name="_users_signup")
+	 * @extra:Template()
 	 */
 	public function signupAction() {
 		$user = new Users;
@@ -48,11 +47,12 @@ class UsersController extends Controller {
 			return new RedirectResponse($this->generateUrl('_index'));
 		}
 
-		return $this->render('BlogWebBundle:Users:signup.html.twig', array('form' => $form));
+		return array('form' => $form);
 	}
 	
 	/**
 	 * @extra:Route("/users/login", name="_users_login")
+	 * @extra:Template()
 	 */
 	public function loginAction() {
 		$userRequest = new UsersLoginRequest;
@@ -70,6 +70,6 @@ class UsersController extends Controller {
 			$error = $error->getMessage();
 		}
 		
-		return $this->render('BlogWebBundle:Users:login.html.twig', array('form' => $form, 'error' => $error));
+		return array('form' => $form, 'error' => $error);
 	}
 }
