@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class: SignupForm
+ * Class: UsersLogin
  * Date begin: Mar 16, 2011
  * 
  * Login form
@@ -24,6 +24,9 @@ class UsersLogin extends Form {
 	public $remember;
 	
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function configure() {
 		$this->setDataClass('Blog\\WebBundle\\Request\\UsersLogin');
 		

@@ -1,1 +1,16 @@
-{% extends "BlogWebBundle::layout.html.twig" %}
+{% extends 'BlogWebBundle::layout.html.twig' %}
+
+{% block content %}
+	<div id="posts">
+	{% for post in posts %}
+		<div class="comment">
+			<a name="pid_{{ post.id }}"></a>
+			<a class="title" href="{{ path('_posts_show', { 'pid': post.id }) }}">{{ post.title }}</a>
+			<p class="content">{{ post.content }}</p>
+			<p class="author">{{ post.user.login }}</p>
+		</div>
+	{% else %}
+		<h3 class="empty">No posts</h3>
+	{% endfor %}
+	</div>
+{% endblock %}

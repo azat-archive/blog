@@ -12,9 +12,7 @@
 
 namespace Blog\WebBundle\Controller;
 
-use	Symfony\Bundle\FrameworkBundle\Controller\Controller,
-	Symfony\Component\Security\Core\SecurityContext,
-	Symfony\Component\HttpFoundation\RedirectResponse;
+use 	Symfony\Component\Security\Core\SecurityContext;
 
 use	Blog\WebBundle\Form\UsersSignup as UsersSignupForm,
 	Blog\WebBundle\Form\UsersLogin as UsersLoginForm,
@@ -39,12 +37,12 @@ class UsersController extends Controller {
 		if ($form->isValid()) {
 			$user->transformPassword();
 			
-			$em = $this->get('doctrine.orm.entity_manager');
+			$em = $this->getEm();
 			$em->persist($user);
 			$em->flush();
 			
-			$this->get('session')->setFlash('notice', 'Valid!');
-			return new RedirectResponse($this->generateUrl('_index'));
+			$this->get('session')->setFlash('notice', 'Signup success!');
+			return $this->redirect('_index');
 		}
 
 		return array('form' => $form);

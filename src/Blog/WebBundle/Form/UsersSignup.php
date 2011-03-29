@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class: SignupForm
+ * Class: UsersSignup
  * Date begin: Mar 16, 2011
  * 
  * Signup form
@@ -29,6 +29,9 @@ class UsersSignup extends Form {
 	public $password;
 	
 	
+	/**
+	 * {@inheritdoc}
+	 */
 	public function configure() {
 		$this->setDataClass('Blog\\WebBundle\\Entity\\Users');
 		

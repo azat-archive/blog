@@ -6,13 +6,16 @@ use	Symfony\Component\Security\Core\User\UserInterface,
 	Symfony\Component\Security\Core\Role\Role,
 	Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
+use	Blog\WebBundle\ACL\SimpleACL,
+	Blog\WebBundle\Exception;
+
 /**
  * Blog\WebBundle\Entity\Users
  *
  * @orm:Table(name="users")
  * @orm:Entity
  */
-class Users implements UserInterface {
+class Users implements UserInterface, SimpleACL {
 	/**
 	 * @var integer $id
 	 *
@@ -72,9 +75,11 @@ class Users implements UserInterface {
 	 * Set login
 	 *
 	 * @param string $login
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function setLogin($login) {
 		$this->login = $login;
+		return $this;
 	}
 
 	/**
@@ -90,9 +95,11 @@ class Users implements UserInterface {
 	 * Set email
 	 *
 	 * @param string $email
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function setEmail($email) {
 		$this->email = $email;
+		return $this;
 	}
 
 	/**
@@ -108,9 +115,11 @@ class Users implements UserInterface {
 	 * Set password
 	 *
 	 * @param string $password
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function setPassword($password) {
 		$this->password = $password;
+		return $this;
 	}
 
 	/**
@@ -128,9 +137,11 @@ class Users implements UserInterface {
 	 * Set firstName
 	 *
 	 * @param string $firstName
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function setFirstName($firstName) {
 		$this->firstName = $firstName;
+		return $this;
 	}
 
 	/**
@@ -146,9 +157,11 @@ class Users implements UserInterface {
 	 * Set secondName
 	 *
 	 * @param string $secondName
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function setSecondName($secondName) {
 		$this->secondName = $secondName;
+		return $this;
 	}
 
 	/**
@@ -208,6 +221,7 @@ class Users implements UserInterface {
 	 * @todo dynamic algoritm from settings
 	 *
 	 * @param string $password
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function transformPassword() {
 		$password = $this->getPassword();
@@ -216,5 +230,34 @@ class Users implements UserInterface {
 		}
 		$encoder = new MessageDigestPasswordEncoder('sha1');
 		$this->setPassword($encoder->encodePassword($password, $this->getSalt()));
+		return $this;
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function canEdit($user) {
+		if (is_numeric($user)) {
+			return ($user == $this->id);
+		}
+		if ($user instanceof Users) {
+			return ($user->id == $this->id);
+		}
+		
+		throw new Exception('$user must be instance of Users or numberic');
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function canDelete($user) {
+		if (is_numeric($user)) {
+			return ($user == $this->id);
+		}
+		if ($user instanceof Users) {
+			return ($user->id == $this->id);
+		}
+		
+		throw new Exception('$user must be instance of Users or numberic');
 	}
 }

@@ -1,0 +1,13 @@
+<a name="comments"></a>
+
+<div id="comments">
+{% for comment in comments %}
+	<div class="comment">
+		<a name="cid_{{ comment.id }}"></a>
+		<p class="content">{{ comment.content }}</p>
+		<p class="author">{{ comment.user.login }}</p>
+	</div>
+{% else %}
+	<h3 class="empty">No comments</h3>
+{% endfor %}
+</div>

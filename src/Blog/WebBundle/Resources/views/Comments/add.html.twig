@@ -1,7 +1,5 @@
-{% extends "BlogWebBundle::layout.html.twig" %}
-
 {% block content %}
-    <form action="" method="POST">
+    <form action="{{ path('_comments_add', { 'pid': pid }) }}" method="POST">
         {{ form_field(form) }}
         <input type="submit" value="Send" />
     </form>

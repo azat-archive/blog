@@ -20,4 +20,33 @@ Blog\WebBundle\Entity\Comments:
       type: integer
       unsigned: false
       nullable: false
+  oneToOne:
+    user:
+      targetEntity: Users
+      cascade:
+        remove: true
+        persist: true
+        refresh: true
+        merge: true
+        detach: true
+      mappedBy: null
+      joinColumns:
+        uid:
+          referencedColumnName: id
+          onDelete: CASCADE
+      orphanRemoval: false
+    post:
+      targetEntity: Posts
+      cascade:
+        remove: true
+        persist: true
+        refresh: true
+        merge: true
+        detach: true
+      mappedBy: null
+      joinColumns:
+        pid:
+          referencedColumnName: id
+          onDelete: CASCADE
+      orphanRemoval: false
   lifecycleCallbacks: {  }

@@ -12,10 +12,6 @@
 
 namespace Blog\WebBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Blog\Bundle\Form;
-
 class MainController extends Controller {
 	/**
 	 * @extra:Route("/", name="_index")

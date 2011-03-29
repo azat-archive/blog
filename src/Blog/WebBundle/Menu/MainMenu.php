@@ -48,8 +48,7 @@ class MainMenu extends Menu {
 		// retrieving the security identity of the currently logged-in user
 		$securityContext = $this->container->get('security.context');
 		if ($securityContext->getToken()) {
-			$user = $securityContext->getToken()->getUser();
-			$this->user = $user;
+			$this->user = $securityContext->getToken()->getUser();
 		}
 	}
 	
@@ -63,7 +62,8 @@ class MainMenu extends Menu {
 			$this->addChild('Logout', '/logout'); // @TODO generate url dynamicly
 		} else {
 			$this->addChild('Index', $this->router->generate('_index'));
-			$this->addChild('Blogs', $this->router->generate('_blogs'));
+			$this->addChild('Posts', $this->router->generate('_posts'));
+			$this->addChild('Add posts', $this->router->generate('_posts_add'));
 		}
 	}
 }

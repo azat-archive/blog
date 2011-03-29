@@ -1,0 +1,13 @@
+{% extends 'BlogWebBundle::layout.html.twig' %}
+
+{% block content %}
+	<div id="posts">
+		<a name="pid_{{ post.id }}"></a>
+		<h4 class="title">{{ post.title }}</h4>
+		<p class="content">{{ post.content }}</p>
+		<p class="author">{{ post.user.login }}</p>
+	</div>
+
+	{% render 'BlogWebBundle:Comments:show' with {'pid': post.id} %}
+	{% render 'BlogWebBundle:Comments:add'  with {'pid': post.id} %}
+{% endblock %}

@@ -6,10 +6,10 @@ _users:
      resource: "@BlogWebBundle/Controller/UsersController.php"
      type:     annotation
 
-_blogs:
-     resource: "@BlogWebBundle/Controller/BlogsController.php"
-     type:     annotation
-
 _posts:
      resource: "@BlogWebBundle/Controller/PostsController.php"
+     type:     annotation
+
+_comments:
+     resource: "@BlogWebBundle/Controller/CommentsController.php"
      type:     annotation

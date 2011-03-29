@@ -2,13 +2,16 @@
 
 namespace Blog\WebBundle\Entity;
 
+use	Blog\WebBundle\ACL\SimpleACL,
+	Blog\WebBundle\Exception;
+
 /**
  * Blog\WebBundle\Entity\Posts
  *
  * @orm:Table(name="posts")
  * @orm:Entity
  */
-class Posts {
+class Posts implements SimpleACL {
 	/**
 	 * @var integer $id
 	 *
@@ -39,6 +42,11 @@ class Posts {
 	 * @validation:Int()
 	 */
 	private $uid;
+	/**
+	 * @OneToOne(targetEntity="Users")
+	 * @JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+	 */
+	private $user;
 
 	/**
 	 * Get id
@@ -53,9 +61,11 @@ class Posts {
 	 * Set title
 	 *
 	 * @param string $title
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
+		return $this;
 	}
 
 	/**
@@ -71,9 +81,11 @@ class Posts {
 	 * Set content
 	 *
 	 * @param text $content
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function setContent($content) {
 		$this->content = $content;
+		return $this;
 	}
 
 	/**
@@ -89,9 +101,11 @@ class Posts {
 	 * Set uid
 	 *
 	 * @param integer $uid
+	 * @return Blog\WebBundle\Entity\Posts
 	 */
 	public function setUid($uid) {
 		$this->uid = $uid;
+		return $this;
 	}
 
 	/**
@@ -101,5 +115,53 @@ class Posts {
 	 */
 	public function getUid() {
 		return $this->uid;
+	}
+
+	/**
+	 * Set user
+	 *
+	 * @param Users $user
+	 * @return Blog\WebBundle\Entity\Posts
+	 */
+	public function setUser(Users $user) {
+		$this->user = $user;
+		return $this;
+	}
+
+	/**
+	 * Get user
+	 *
+	 * @return Users $uid
+	 */
+	public function getUser() {
+		return $this->user;
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function canEdit($user) {
+		if (is_numeric($user)) {
+			return ($user == $this->id);
+		}
+		if ($user instanceof Users) {
+			return ($user->id == $this->id);
+		}
+		
+		throw new Exception('$user must be instance of Users or numberic');
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function canDelete($user) {
+		if (is_numeric($user)) {
+			return ($user == $this->id);
+		}
+		if ($user instanceof Users) {
+			return ($user->id == $this->id);
+		}
+		
+		throw new Exception('$user must be instance of Users or numberic');
 	}
 }
