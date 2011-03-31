@@ -6,8 +6,6 @@
  * 
  * Posts controller
  * 
- * @todo add create/edit/delete time
- * 
  * @package blog
  * @author Azat Khuzhin
  */
@@ -29,18 +27,21 @@ class PostsController extends Controller {
 	}
 	
       /**
-	 * @extra:Route("/post/{pid}", name="_posts_show")
+	 * @extra:Routes({
+	 *	@extra:Route("/post/{pid}", name="_posts_show"),
+	 *	@extra:Route("/post/{pid}/comment/{cid}/edit", name="_posts_show_comments_edit")
+	 * })
 	 * @extra:Template()
 	 */
-	public function showAction($pid) {
+	public function showAction($pid, $cid = null) {
 		$em = $this->getEm();
 		$post = $em->find('Blog\\WebBundle\\Entity\\Posts', $pid);
 		// not found
 		if (!$post) {
-			throw new NotFoundHttpException('The post does not exist.');
+			throw ExceptionController::notFound('The post does not exist.');
 		}
 		
-		return array('post' => $post);
+		return array('post' => $post, 'commentEdit' => $cid);
 	}
 	
       /**
@@ -59,7 +60,7 @@ class PostsController extends Controller {
 			$em->persist($post);
 			$em->flush();
 			
-			return $this->redirect('_posts');
+			return $this->redirectGenerate('_posts');
 		}
 
 		return array('form' => $form);
@@ -74,7 +75,7 @@ class PostsController extends Controller {
 		$post = $em->find('Blog\\WebBundle\\Entity\\Posts', $pid);
 		// not found
 		if (!$post) {
-			throw new NotFoundHttpException('The post does not exist.');
+			throw ExceptionController::notFound('The post does not exist.');
 		}
 		$form = PostsAddForm::create($this->get('form.context'), 'posts_edit');
 		
@@ -83,25 +84,26 @@ class PostsController extends Controller {
 			$em->persist($post);
 			$em->flush();
 			
-			return $this->redirect('_posts');
+			return $this->redirectGenerate('_posts');
 		}
 
 		return array('form' => $form);
 	}
 	
 	/**
-	 * @extra:Route("/post/{pid}/delete", name="_comments_delete")
+	 * @extra:Route("/post/{pid}/delete", name="_posts_delete")
+	 * @todo not to delete user!
 	 */
 	public function deleteAction($pid) {
 		$em = $this->getEm();
 		$post = $em->find('Blog\\WebBundle\\Entity\\Posts', $pid);
 		// not found
 		if (!$post) {
-			throw new NotFoundHttpException('The post does not exist.');
+			throw ExceptionController::notFound('The post does not exist.');
 		}
 		$em->remove($post);
 		$em->flush();
 		
-		return $this->redirect('_posts');
+		return $this->redirectGenerate('_posts');
 	}
 }

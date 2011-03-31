@@ -7,7 +7,9 @@ use	Blog\WebBundle\ACL\SimpleACL,
 
 /**
  * Blog\WebBundle\Entity\Comments
- *
+ * 
+ * @todo add create/edit/delete time
+ * 
  * @orm:Table(name="comments")
  * @orm:Entity
  */
@@ -167,10 +169,10 @@ class Comments implements SimpleACL {
 	 */
 	public function canEdit($user) {
 		if (is_numeric($user)) {
-			return ($user == $this->uid);
+			return ($user == $this->getUid());
 		}
 		if ($user instanceof Users) {
-			return ($user->id == $this->uid);
+			return ($user->getId() == $this->getUid());
 		}
 		
 		throw new Exception('$user must be instance of Users or numberic');
@@ -181,10 +183,10 @@ class Comments implements SimpleACL {
 	 */
 	public function canDelete($user) {
 		if (is_numeric($user)) {
-			return ($user == $this->uid);
+			return ($user == $this->getUid());
 		}
 		if ($user instanceof Users) {
-			return ($user->id == $this->uid);
+			return ($user->getId() == $this->getUid());
 		}
 		
 		throw new Exception('$user must be instance of Users or numberic');

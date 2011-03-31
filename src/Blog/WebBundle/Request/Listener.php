@@ -15,7 +15,7 @@ namespace Blog\WebBundle\Request;
 use	Symfony\Component\HttpKernel\Log\LoggerInterface,
 	Symfony\Component\HttpKernel\HttpKernelInterface,
 	Symfony\Component\HttpFoundation\Request,
-	Symfony\Component\EventDispatcher\EventInterface,
+	Symfony\Component\HttpKernel\Event\GetResponseEvent,
 	Symfony\Component\Routing\RouterInterface,
 	Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -30,7 +30,7 @@ class Listener {
 		$this->logger = $logger;
 	}
 
-	public function handle(EventInterface $event) {
+	public function onCoreRequest(GetResponseEvent $event) {
 		return;
 	}
 }

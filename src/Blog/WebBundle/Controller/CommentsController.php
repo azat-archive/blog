@@ -6,8 +6,6 @@
  * 
  * Comments controller
  * 
- * @todo add create/edit/delete time
- * 
  * @package blog
  * @author Azat Khuzhin
  */
@@ -37,7 +35,7 @@ class CommentsController extends Controller {
 		$post = $em->find('Blog\\WebBundle\\Entity\\Posts', $pid);
 		// not found
 		if (!$post) {
-			throw new NotFoundHttpException('The post does not exist.');
+			throw ExceptionController::notFound('The post does not exist.');
 		}
 		
 		$comment = new Comments;
@@ -52,49 +50,50 @@ class CommentsController extends Controller {
 			$em->persist($comment);
 			$em->flush();
 			
-			return $this->redirect('_posts_show', array('pid' => $pid));
+			return $this->redirectGenerate('_posts_show', array('pid' => $pid));
 		}
 		
 		return array('form' => $form, 'pid' => $pid);
 	}
 	
 	/**
-	 * @extra:Route("/post/{pid}/comment/{cid}/edit", name="_comments_edit")
+	 * @extra:Route("/post/{pid}/comment/{cid}/edit-post", name="_comments_edit")
 	 * @extra:Template()
 	 */
 	public function editAction($pid, $cid) {
 		$em = $this->getEm();
-		$comment = $em->find('Blog\\WebBundle\\Entity\\Comments', $cid);
+		$commentEdit = $em->find('Blog\\WebBundle\\Entity\\Comments', $cid);
 		// not found
-		if (!$comment) {
-			throw new NotFoundHttpException('The comment does not exist.');
+		if (!$commentEdit) {
+			throw ExceptionController::notFound('The comment does not exist.');
 		}
 		$form = CommentsAddForm::create($this->get('form.context'), 'comments_edit');
 		
-		$form->bind($this->get('request'), $comment);
+		$form->bind($this->get('request'), $commentEdit);
 		if ($form->isValid()) {
-			$em->persist($comment);
+			$em->persist($commentEdit);
 			$em->flush();
 			
-			return $this->redirect('_posts_show', array('pid' => $pid));
+			return $this->redirectGenerate('_posts_show', array('pid' => $pid));
 		}
 		
-		return array('form' => $form, 'pid' => $pid);
+		return array('form' => $form, 'pid' => $pid, 'commentEdit' => $commentEdit);
 	}
 	
 	/**
 	 * @extra:Route("/post/{pid}/comment/{cid}/delete", name="_comments_delete")
+	 * @todo not to delete user!
 	 */
 	public function deleteAction($pid, $cid) {
 		$em = $this->getEm();
 		$comment = $em->find('Blog\\WebBundle\\Entity\\Comments', $cid);
 		// not found
 		if (!$comment) {
-			throw new NotFoundHttpException('The comment does not exist.');
+			throw ExceptionController::notFound('The comment does not exist.');
 		}
 		$em->remove($comment);
 		$em->flush();
 		
-		return $this->redirect('_posts_show', array('pid' => $pid));
+		return $this->redirectGenerate('_posts_show', array('pid' => $pid));
 	}
 }

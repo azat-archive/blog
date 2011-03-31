@@ -1,6 +1,4 @@
-{% block content %}
-    <form action="{{ path('_comments_edit', { 'pid': pid, 'cid': editComment.id }) }}" method="POST">
-        {{ form_field(form) }}
-        <input type="submit" value="Send" />
-    </form>
-{% endblock %}
+<form action="{{ path('_comments_edit', { 'pid': pid, 'cid': commentEdit.id }) }}" method="POST">
+  {{ form_field(form) }}
+  <input type="submit" value="Send" />
+</form>

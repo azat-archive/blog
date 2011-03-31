@@ -42,7 +42,7 @@ class UsersController extends Controller {
 			$em->flush();
 			
 			$this->get('session')->setFlash('notice', 'Signup success!');
-			return $this->redirect('_index');
+			return $this->redirectGenerate('_index');
 		}
 
 		return array('form' => $form);

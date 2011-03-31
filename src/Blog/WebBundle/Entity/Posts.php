@@ -7,7 +7,9 @@ use	Blog\WebBundle\ACL\SimpleACL,
 
 /**
  * Blog\WebBundle\Entity\Posts
- *
+ * 
+ * @todo add create/edit/delete time
+ * 
  * @orm:Table(name="posts")
  * @orm:Entity
  */
@@ -142,10 +144,10 @@ class Posts implements SimpleACL {
 	 */
 	public function canEdit($user) {
 		if (is_numeric($user)) {
-			return ($user == $this->id);
+			return ($user == $this->getId());
 		}
 		if ($user instanceof Users) {
-			return ($user->id == $this->id);
+			return ($user->getId() == $this->getUid());
 		}
 		
 		throw new Exception('$user must be instance of Users or numberic');
@@ -156,10 +158,10 @@ class Posts implements SimpleACL {
 	 */
 	public function canDelete($user) {
 		if (is_numeric($user)) {
-			return ($user == $this->id);
+			return ($user == $this->getUid());
 		}
 		if ($user instanceof Users) {
-			return ($user->id == $this->id);
+			return ($user->getId() == $this->getUid());
 		}
 		
 		throw new Exception('$user must be instance of Users or numberic');

@@ -11,7 +11,9 @@ use	Blog\WebBundle\ACL\SimpleACL,
 
 /**
  * Blog\WebBundle\Entity\Users
- *
+ * 
+ * @todo add create/edit/delete time
+ * 
  * @orm:Table(name="users")
  * @orm:Entity
  */
@@ -252,10 +254,10 @@ class Users implements UserInterface, SimpleACL {
 	 */
 	public function canDelete($user) {
 		if (is_numeric($user)) {
-			return ($user == $this->id);
+			return ($user == $this->getId());
 		}
 		if ($user instanceof Users) {
-			return ($user->id == $this->id);
+			return ($user->getId() == $this->getId());
 		}
 		
 		throw new Exception('$user must be instance of Users or numberic');

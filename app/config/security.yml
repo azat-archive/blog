@@ -4,33 +4,33 @@ security:
 
     providers:
         main:
-            entity: { class: BlogWebBundle:Users, property: email } 
+            entity: { class: BlogWeb:Users, property: email } 
 
     firewalls:
         profiler:
-            pattern:     /_profiler.*
+            pattern:     ^/_profiler
             security:    false
 
         wdt:
-            pattern:     /_wdt.*
+            pattern:     ^/_wdt
             security:    false
 
         configurator:
-            pattern:     /_configurator.*
+            pattern:     ^/_configurator
             security:    false
 
         web_main:
-            pattern:     (?!/users/signup|/users/login).*
+            pattern:     ^(?!/users/signup|/users/login).*$
             logout:      { path: /logout, target: /users/login }
             form_login:
                 check_path:                     /login_check
                 login_path:                     /users/login
-                failure_path:                   /users/login
+                failure_path:                   /users/login?failed=1
                 remember_me:                    true
                 post_only:                      true
                 always_use_default_target_path: false
                 default_target_path:            /
                 target_path_parameter:          _target_path
-                use_referer:                    true
+#                use_referer:                    true
                 username_parameter:             users_login[email]
                 password_parameter:             users_login[password]

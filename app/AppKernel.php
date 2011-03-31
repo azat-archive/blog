@@ -19,11 +19,10 @@ class AppKernel extends Kernel {
 			// app bundles
 			new Blog\WebBundle\BlogWebBundle(),
 		);
-
+		
 		if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 			$bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
 			$bundles[] = new Symfony\Bundle\WebConfiguratorBundle\SymfonyWebConfiguratorBundle();
-			// $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
 		}
 
 		return $bundles;

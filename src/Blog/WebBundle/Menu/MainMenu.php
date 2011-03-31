@@ -59,11 +59,11 @@ class MainMenu extends Menu {
 		if (!$this->user) {
 			$this->addChild('Signup', $this->router->generate('_users_signup'));
 			$this->addChild('Login / Signin', $this->router->generate('_users_login'));
-			$this->addChild('Logout', '/logout'); // @TODO generate url dynamicly
 		} else {
 			$this->addChild('Index', $this->router->generate('_index'));
 			$this->addChild('Posts', $this->router->generate('_posts'));
 			$this->addChild('Add posts', $this->router->generate('_posts_add'));
+			$this->addChild('Logout', '/logout'); // @TODO generate url dynamicly
 		}
 	}
 }
