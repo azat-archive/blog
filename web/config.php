@@ -4,7 +4,11 @@ if (!isset($_SERVER['HTTP_HOST'])) {
     die('This script cannot be run from the CLI. Run it from a browser.');
 }
 
-if (!in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) {
+if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
+    '127.0.0.1',
+    '::1',
+))) {
+    header('HTTP/1.0 403 Forbidden');
     die('This script is only accessible from localhost.');
 }
 
@@ -117,7 +121,7 @@ if (ini_get('session.auto_start')) {
                 <div class="symfony-block-content">
                     <h1>Welcome!</h1>
                     <p>Welcome to your new Symfony project.</p>
-                    <p>This script will guide you through the basic configuration of your project. You can also do the same by editing the ‘<strong>app/parameters.ini</strong>’ file directly.</p>
+                    <p>This script will guide you through the basic configuration of your project. You can also do the same by editing the ‘<strong>app/config/parameters.ini</strong>’ file directly.</p>
 
                     <?php if (count($majorProblems)): ?>
                         <h2>

@@ -5,7 +5,7 @@ What's inside?
 --------------
 
 Configuration
---------------
+-------------
 
 For apache
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DIR=`php -r "echo realpath(dirname(\\$_SERVER['argv'][0]));"`
+DIR=`php -r "echo dirname(dirname(realpath('$0')));"`
 VENDOR="$DIR/vendor"
 VERSION=`cat "$DIR/VERSION"`
 
@@ -43,19 +43,19 @@ install_git()
 }
 
 # Assetic
-install_git assetic git://github.com/kriswallsmith/assetic.git v1.0.0alpha1
+install_git assetic git://github.com/kriswallsmith/assetic.git #v1.0.0alpha1
 
 # Symfony
-install_git symfony git://github.com/symfony/symfony.git $VERSION
+install_git symfony git://github.com/symfony/symfony.git #v$VERSION
 
 # Update the bootstrap files
-../bin/build_bootstrap.php
+$DIR/bin/build_bootstrap.php
 
 # Doctrine ORM
-install_git doctrine git://github.com/doctrine/doctrine2.git 2.0.2
+install_git doctrine git://github.com/doctrine/doctrine2.git 2.0.3
 
 # Doctrine DBAL
-install_git doctrine-dbal git://github.com/doctrine/dbal.git 2.0.2
+install_git doctrine-dbal git://github.com/doctrine/dbal.git 2.0.3
 
 # Doctrine Common
 install_git doctrine-common git://github.com/doctrine/common.git 2.0.1
@@ -64,22 +64,26 @@ install_git doctrine-common git://github.com/doctrine/common.git 2.0.1
 install_git swiftmailer git://github.com/swiftmailer/swiftmailer.git origin/4.1
 
 # Twig
-install_git twig git://github.com/fabpot/Twig.git
+install_git twig git://github.com/fabpot/Twig.git v1.0.0
 
 # Twig Extensions
 install_git twig-extensions git://github.com/fabpot/Twig-extensions.git
 
-# Zend Framework Log
-mkdir -p zend-log/Zend
-cd zend-log/Zend
-install_git Log git://github.com/symfony/zend-log.git
+# Monolog
+install_git monolog git://github.com/Seldaek/monolog.git
 cd ../..
 
-# FrameworkExtraBundle
+# SensioFrameworkExtraBundle
 mkdir -p bundles/Sensio/Bundle
 cd bundles/Sensio/Bundle
-install_git FrameworkExtraBundle git://github.com/sensio/FrameworkExtraBundle.git
+install_git FrameworkExtraBundle git://github.com/sensio/SensioFrameworkExtraBundle.git
 cd ../../..
+
+# SecurityExtraBundle
+mkdir -p bundles/JMS
+cd bundles/JMS
+install_git SecurityExtraBundle git://github.com/schmittjoh/SecurityExtraBundle.git
+cd ../..
 
 # WebConfiguratorBundle
 mkdir -p bundles/Symfony/Bundle
@@ -88,4 +92,4 @@ install_git WebConfiguratorBundle git://github.com/symfony/WebConfiguratorBundle
 cd ../../..
 
 # Update assets
-../app/console assets:install ../web/
+$DIR/app/console assets:install $DIR/web/
