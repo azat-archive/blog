@@ -70,4 +70,18 @@ class UsersController extends Controller {
 		
 		return array('form' => $form, 'error' => $error);
 	}
+	
+	/**
+	 * @extra:Route("/login_check", name="_security_check")
+	 */
+	public function securityCheckAction() {
+		// The security layer will intercept this request
+	}
+
+	/**
+	 * @extra:Route("/logout", name="_security_logout")
+	 */
+	public function securityLogoutAction() {
+		// The security layer will intercept this request
+	}
 }

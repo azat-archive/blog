@@ -12,7 +12,7 @@
 
 namespace Blog\WebBundle\Menu;
 
-use	Knplabs\MenuBundle\Menu,
+use	Knplabs\Bundle\MenuBundle\Menu,
 	Symfony\Component\HttpFoundation\Request,
 	Symfony\Component\Routing\Router,
 	Symfony\Component\DependencyInjection\ContainerInterface;

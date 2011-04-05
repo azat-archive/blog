@@ -1,4 +1,4 @@
-{% extends 'BlogWeb::layout.html.twig' %}
+{% extends 'BlogWebBundle::layout.html.twig' %}
 
 {% block content %}
 	<div class="post">
@@ -17,10 +17,10 @@
 		</div>
 	</div>
 
-	{% render 'BlogWeb:Comments:show' with {'pid': post.id} %}
+	{% render 'BlogWebBundle:Comments:show' with {'pid': post.id} %}
 	{% if commentEdit %}
-	{% render 'BlogWeb:Comments:edit'  with {'pid': post.id, 'cid': commentEdit} %}
+	{% render 'BlogWebBundle:Comments:edit'  with {'pid': post.id, 'cid': commentEdit} %}
 	{% else %}
-	{% render 'BlogWeb:Comments:add'  with {'pid': post.id} %}
+	{% render 'BlogWebBundle:Comments:add'  with {'pid': post.id} %}
 	{% endif %}
 {% endblock %}

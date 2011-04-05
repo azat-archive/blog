@@ -9,12 +9,13 @@ class AppKernel extends Kernel {
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
 			new Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new Symfony\Bundle\TwigBundle\TwigBundle(),
-			new Symfony\Bundle\ZendBundle\ZendBundle(),
+			new Symfony\Bundle\MonologBundle\MonologBundle(),
 			new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
 			new Symfony\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-			new Knplabs\MenuBundle\KnplabsMenuBundle(),
+			new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+			new Knplabs\Bundle\MenuBundle\KnplabsMenuBundle(),
 			
 			// app bundles
 			new Blog\WebBundle\BlogWebBundle(),
@@ -30,9 +31,5 @@ class AppKernel extends Kernel {
 
 	public function registerContainerConfiguration(LoaderInterface $loader) {
 		$loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
-	}
-
-	public function registerRootDir() {
-		return __DIR__;
 	}
 }

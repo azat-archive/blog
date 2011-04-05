@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.ini }
-    - { resource: "@BlogWeb/Resources/config/menu.xml" }
-    - { resource: "@BlogWeb/Resources/config/event_dispatcher.xml" }
+    - { resource: "@BlogWebBundle/Resources/config/menu.xml" }
+    - { resource: "@BlogWebBundle/Resources/config/event_dispatcher.xml" }
     - { resource: security.yml }
 
 framework:
@@ -52,7 +52,7 @@ doctrine:
         entity_managers:
             default:
                 mappings:
-                    BlogWeb: ~
+                    BlogWebBundle: ~
                 query_cache_driver: xcache
 
 # Swiftmailer Configuration

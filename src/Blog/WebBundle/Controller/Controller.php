@@ -17,7 +17,7 @@ use	Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController,
 	Symfony\Component\Security\Core\SecurityContext,
 	Symfony\Component\HttpFoundation\RedirectResponse;
 
-class Controller extends BaseController {
+abstract class Controller extends BaseController {
 	private $em;
 	private $user;
 	private $template;

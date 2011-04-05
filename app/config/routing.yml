@@ -1,15 +1,15 @@
 _main:
-     resource: "@BlogWeb/Controller/MainController.php"
+     resource: "@BlogWebBundle/Controller/MainController.php"
      type:     annotation
 
 _users:
-     resource: "@BlogWeb/Controller/UsersController.php"
+     resource: "@BlogWebBundle/Controller/UsersController.php"
      type:     annotation
 
 _posts:
-     resource: "@BlogWeb/Controller/PostsController.php"
+     resource: "@BlogWebBundle/Controller/PostsController.php"
      type:     annotation
 
 _comments:
-     resource: "@BlogWeb/Controller/CommentsController.php"
+     resource: "@BlogWebBundle/Controller/CommentsController.php"
      type:     annotation
