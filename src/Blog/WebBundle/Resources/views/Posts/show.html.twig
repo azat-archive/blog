@@ -3,9 +3,9 @@
 {% block content %}
 	<div class="post">
 		<a name="pid_{{ post.id }}"></a>
-		<h4 class="title">{{ post.title }}</h4>
+		<h4 class="title">{{ post }}</h4>
 		<p class="content">{{ post.content }}</p>
-		<p class="author">{{ post.user.login }}</p>
+		<p class="author">{{ post.user }}</p>
 
 		<div class="actions">
 			{% if post.canEdit(user) %}

@@ -4,8 +4,8 @@
 {% for comment in comments %}
 	<div class="comment">
 		<a name="cid_{{ comment.id }}"></a>
-		<p class="content">{{ comment.content }}</p>
-		<p class="author">{{ comment.user.login }}</p>
+		<p class="content">{{ comment }}</p>
+		<p class="author">{{ comment.user }}</p>
 		
 		<div class="actions">
 			{% if comment.canEdit(user) %}

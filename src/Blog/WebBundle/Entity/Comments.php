@@ -13,7 +13,7 @@ use	Blog\WebBundle\ACL\SimpleACL,
  * @orm:Table(name="comments")
  * @orm:Entity
  */
-class Comments implements SimpleACL {
+class Comments implements Entity, SimpleACL {
 	/**
 	 * @var integer $id
 	 *
@@ -192,5 +192,12 @@ class Comments implements SimpleACL {
 		}
 		
 		throw new Exception('$user must be instance of Users or numberic');
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function __toString() {
+		return $this->getContent();
 	}
 }

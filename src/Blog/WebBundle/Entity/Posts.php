@@ -13,7 +13,7 @@ use	Blog\WebBundle\ACL\SimpleACL,
  * @orm:Table(name="posts")
  * @orm:Entity
  */
-class Posts implements SimpleACL {
+class Posts implements Entity, SimpleACL {
 	/**
 	 * @var integer $id
 	 *
@@ -166,5 +166,12 @@ class Posts implements SimpleACL {
 		}
 		
 		throw new Exception('$user must be instance of Users or numberic');
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function __toString() {
+		return $this->getTitle();
 	}
 }

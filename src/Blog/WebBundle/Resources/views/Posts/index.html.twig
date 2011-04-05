@@ -5,9 +5,10 @@
 	{% for post in posts %}
 		<div class="post">
 			<a name="pid_{{ post.id }}"></a>
-			<a class="title" href="{{ path('_posts_show', { 'pid': post.id }) }}">{{ post.title }}</a>
+			<a class="title" href="{{ path('_posts_show', { 'pid': post.id }) }}">{{ post }}</a>
+			{# @todo add substr method #}
 			<p class="content">{{ post.content }}</p>
-			<p class="author">{{ post.user.login }}</p>
+			<p class="author">{{ post.user }}</p>
 			
 			<div class="actions">
 				{% if post.canEdit(user) %}

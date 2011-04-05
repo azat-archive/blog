@@ -17,7 +17,7 @@ use	Blog\WebBundle\ACL\SimpleACL,
  * @orm:Table(name="users")
  * @orm:Entity
  */
-class Users implements UserInterface, SimpleACL {
+class Users implements Entity, UserInterface, SimpleACL {
 	/**
 	 * @var integer $id
 	 *
@@ -261,5 +261,12 @@ class Users implements UserInterface, SimpleACL {
 		}
 		
 		throw new Exception('$user must be instance of Users or numberic');
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function __toString() {
+		return sprintf('%s %s %s', $this->getFirstName(), $this->getLogin(), $this->getSecondName());
 	}
 }
