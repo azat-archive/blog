@@ -38,8 +38,9 @@ class Comments implements SimpleACL {
 	 */
 	private $uid;
 	/**
-	 * @OneToOne(targetEntity="Users", inversedBy="Comments")
-	 * @JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+	 * @orm:InheritanceType("JOINED")
+	 * @orm:OneToOne(targetEntity="Users", inversedBy="Comments")
+	 * @orm:JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
 	 */
 	private $user;
 	/**
@@ -50,8 +51,9 @@ class Comments implements SimpleACL {
 	 */
 	private $pid;
 	/**
-	 * @ManyToOne(targetEntity="Posts", inversedBy="Comments")
-	 * @JoinColumn(name="pid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+	 * @orm:InheritanceType("JOINED")
+	 * @orm:ManyToOne(targetEntity="Posts", inversedBy="Comments")
+	 * @orm:JoinColumn(name="pid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
 	 */
 	private $post;
 	

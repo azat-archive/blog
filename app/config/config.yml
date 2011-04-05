@@ -52,7 +52,8 @@ doctrine:
         entity_managers:
             default:
                 mappings:
-                    BlogWebBundle: ~
+                    BlogWebBundle:
+                        type: annotation
                 query_cache_driver: xcache
 
 # Swiftmailer Configuration

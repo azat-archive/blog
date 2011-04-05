@@ -45,8 +45,9 @@ class Posts implements SimpleACL {
 	 */
 	private $uid;
 	/**
-	 * @OneToOne(targetEntity="Users")
-	 * @JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+	 * @orm:InheritanceType("JOINED")
+	 * @orm:OneToOne(targetEntity="Users")
+	 * @orm:JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
 	 */
 	private $user;
 
