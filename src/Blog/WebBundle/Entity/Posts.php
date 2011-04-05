@@ -20,28 +20,28 @@ class Posts implements SimpleACL {
 	 * @orm:Column(name="id", type="integer", nullable=false)
 	 * @orm:Id
 	 * @orm:GeneratedValue(strategy="IDENTITY")
-	 * @validation:Int()
+	 * @assert:Int()
 	 */
 	private $id;
 	/**
 	 * @var string $title
 	 *
 	 * @orm:Column(name="title", type="string", length=255, nullable=false)
-	 * @validation:NotBlank()
+	 * @assert:NotBlank()
 	 */
 	private $title;
 	/**
 	 * @var text $content
 	 *
 	 * @orm:Column(name="content", type="text", nullable=false)
-	 * @validation:NotBlank()
+	 * @assert:NotBlank()
 	 */
 	private $content;
 	/**
 	 * @var integer $uid
 	 *
 	 * @orm:Column(name="uid", type="integer", nullable=false)
-	 * @validation:Int()
+	 * @assert:Int()
 	 */
 	private $uid;
 	/**

@@ -38,6 +38,14 @@ class UsersController extends Controller {
 			$user->transformPassword();
 			
 			$em = $this->getEm();
+			// check is user with such emails exists
+			$alreadyExistedUser = $em->getRepository('Blog\\WebBundle\\Entity\\Users')->findOneByEmail($user->getEmail());
+			if ($alreadyExistedUser) {
+				$this->get('session')->setFlash('notice', 'Such user already exists!');
+				return array('form' => $form);
+			}
+			
+			
 			$em->persist($user);
 			$em->flush();
 			

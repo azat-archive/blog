@@ -20,21 +20,21 @@ class Comments implements SimpleACL {
 	 * @orm:Column(name="id", type="integer", nullable=false)
 	 * @orm:Id
 	 * @orm:GeneratedValue(strategy="IDENTITY")
-	 * @validation:Int()
+	 * @assert:Int()
 	 */
 	private $id;
 	/**
 	 * @var text $content
 	 *
 	 * @orm:Column(name="content", type="text", nullable=false)
-	 * @validation:NotBlank()
+	 * @assert:NotBlank()
 	 */
 	private $content;
 	/**
 	 * @var integer $uid
 	 *
 	 * @orm:Column(name="uid", type="integer", nullable=false)
-	 * @validation:Int()
+	 * @assert:Int()
 	 */
 	private $uid;
 	/**
@@ -46,7 +46,7 @@ class Comments implements SimpleACL {
 	 * @var integer $pid
 	 *
 	 * @orm:Column(name="pid", type="integer", nullable=false)
-	 * @validation:Int()
+	 * @assert:Int()
 	 */
 	private $pid;
 	/**

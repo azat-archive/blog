@@ -24,35 +24,35 @@ class Users implements UserInterface, SimpleACL {
 	 * @orm:Column(name="id", type="integer", nullable=false)
 	 * @orm:Id
 	 * @orm:GeneratedValue(strategy="IDENTITY")
-	 * @validation:Int()
+	 * @assert:Int()
 	 */
 	private $id;
 	/**
 	 * @var string $login
 	 *
 	 * @orm:Column(name="login", type="string", length=255, nullable=false)
-	 * @validation:NotBlank()
+	 * @assert:NotBlank()
 	 */
 	private $login;
 	/**
 	 * @var string $email
 	 *
 	 * @orm:Column(name="email", type="string", length=255, nullable=false)
-	 * @validation:Email()
+	 * @assert:Email()
 	 */
 	private $email;
 	/**
 	 * @var string $password
 	 *
 	 * @orm:Column(name="password", type="string", length=32, nullable=false)
-	 * @validation:NotBlank()
+	 * @assert:NotBlank()
 	 */
 	private $password;
 	/**
 	 * @var string $firstName
 	 *
 	 * @orm:Column(name="first_name", type="string", length=255, nullable=false)
-	 * @validation:NotBlank()
+	 * @assert:NotBlank()
 	 */
 	private $firstName;
 	/**

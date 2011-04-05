@@ -15,14 +15,14 @@ class UsersLogin {
 	 * @var string $email
 	 *
 	 * @orm:Column(name="email", type="string", length=255, nullable=false)
-	 * @validation:Email()
+	 * @assert:Email()
 	 */
 	private $email;
 	/**
 	 * @var string $password
 	 *
 	 * @orm:Column(name="password", type="string", length=32, nullable=false)
-	 * @validation:NotBlank()
+	 * @assert:NotBlank()
 	 */
 	private $password;
 
