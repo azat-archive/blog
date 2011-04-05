@@ -82,7 +82,6 @@ class CommentsController extends Controller {
 	
 	/**
 	 * @extra:Route("/post/{pid}/comment/{cid}/delete", name="_comments_delete")
-	 * @todo not to delete user!
 	 */
 	public function deleteAction($pid, $cid) {
 		$em = $this->getEm();

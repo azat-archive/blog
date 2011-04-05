@@ -92,7 +92,6 @@ class PostsController extends Controller {
 	
 	/**
 	 * @extra:Route("/post/{pid}/delete", name="_posts_delete")
-	 * @todo not to delete user!
 	 */
 	public function deleteAction($pid) {
 		$em = $this->getEm();
