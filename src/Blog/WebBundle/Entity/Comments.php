@@ -84,7 +84,7 @@ class Comments implements Entity, SimpleACL {
 	 * Set content
 	 *
 	 * @param text $content
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Comments
 	 */
 	public function setContent($content) {
 		$this->content = $content;
@@ -104,7 +104,7 @@ class Comments implements Entity, SimpleACL {
 	 * Set uid
 	 *
 	 * @param integer $uid
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Comments
 	 */
 	public function setUid($uid) {
 		$this->uid = $uid;
@@ -124,7 +124,7 @@ class Comments implements Entity, SimpleACL {
 	 * Set pid
 	 *
 	 * @param integer $pid
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Comments
 	 */
 	public function setPid($pid) {
 		$this->pid = $pid;
@@ -144,7 +144,7 @@ class Comments implements Entity, SimpleACL {
 	 * Set user
 	 *
 	 * @param Users $user
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Comments
 	 */
 	public function setUser(Users $user) {
 		$this->user = $user;
@@ -154,7 +154,7 @@ class Comments implements Entity, SimpleACL {
 	/**
 	 * Get user
 	 *
-	 * @return integer $uid
+	 * @return Users $user
 	 */
 	public function getUser() {
 		return $this->user;
@@ -164,7 +164,7 @@ class Comments implements Entity, SimpleACL {
 	 * Set post
 	 *
 	 * @param Posts $post
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Comments
 	 */
 	public function setPost(Posts $post) {
 		$this->post = $post;
@@ -174,7 +174,7 @@ class Comments implements Entity, SimpleACL {
 	/**
 	 * Get post
 	 *
-	 * @return object $uid
+	 * @return Posts $post
 	 */
 	public function getPost() {
 		return $this->post;

@@ -76,7 +76,7 @@ class Posts implements Entity, SimpleACL {
 	 * Set title
 	 *
 	 * @param string $title
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Posts
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
@@ -96,7 +96,7 @@ class Posts implements Entity, SimpleACL {
 	 * Set content
 	 *
 	 * @param text $content
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Posts
 	 */
 	public function setContent($content) {
 		$this->content = $content;
@@ -116,7 +116,7 @@ class Posts implements Entity, SimpleACL {
 	 * Set uid
 	 *
 	 * @param integer $uid
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Posts
 	 */
 	public function setUid($uid) {
 		$this->uid = $uid;
@@ -136,7 +136,7 @@ class Posts implements Entity, SimpleACL {
 	 * Set user
 	 *
 	 * @param Users $user
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Posts
 	 */
 	public function setUser(Users $user) {
 		$this->user = $user;
@@ -146,7 +146,7 @@ class Posts implements Entity, SimpleACL {
 	/**
 	 * Get user
 	 *
-	 * @return Users $uid
+	 * @return Users $user
 	 */
 	public function getUser() {
 		return $this->user;

@@ -89,7 +89,7 @@ class Users implements Entity, UserInterface, SimpleACL {
 	 * Set login
 	 *
 	 * @param string $login
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Users
 	 */
 	public function setLogin($login) {
 		$this->login = $login;
@@ -109,7 +109,7 @@ class Users implements Entity, UserInterface, SimpleACL {
 	 * Set email
 	 *
 	 * @param string $email
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Users
 	 */
 	public function setEmail($email) {
 		$this->email = $email;
@@ -129,7 +129,7 @@ class Users implements Entity, UserInterface, SimpleACL {
 	 * Set password
 	 *
 	 * @param string $password
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Users
 	 */
 	public function setPassword($password) {
 		$this->password = $password;
@@ -151,7 +151,7 @@ class Users implements Entity, UserInterface, SimpleACL {
 	 * Set firstName
 	 *
 	 * @param string $firstName
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Users
 	 */
 	public function setFirstName($firstName) {
 		$this->firstName = $firstName;
@@ -171,7 +171,7 @@ class Users implements Entity, UserInterface, SimpleACL {
 	 * Set secondName
 	 *
 	 * @param string $secondName
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @return Users
 	 */
 	public function setSecondName($secondName) {
 		$this->secondName = $secondName;
