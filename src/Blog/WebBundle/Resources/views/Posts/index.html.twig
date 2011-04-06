@@ -7,10 +7,11 @@
 			<a name="pid_{{ post.id }}"></a>
 			<a class="title" href="{{ path('_posts_show', { 'pid': post.id }) }}">{{ post }}</a>
 			{# @todo add substr method #}
-			<p class="content">{{ post.content }}</p>
+			<p class="content">{{ post.content|truncate(250)|nl2br }}</p>
 			<p class="author">{{ post.user }}</p>
 			
 			<div class="actions">
+				<a href="{{ path('_posts_show_comments', { 'pid': post.id }) }}">Comments</a>
 				{% if post.canEdit(user) %}
 				<a href="{{ path('_posts_edit', { 'pid': post.id }) }}">Edit</a>
 				{% endif %}

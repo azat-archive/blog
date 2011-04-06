@@ -12,35 +12,35 @@
 
 namespace Blog\WebBundle\Menu;
 
-use	Knplabs\Bundle\MenuBundle\Menu,
-	Symfony\Component\HttpFoundation\Request,
-	Symfony\Component\Routing\Router,
-	Symfony\Component\DependencyInjection\ContainerInterface;
+use Knplabs\Bundle\MenuBundle\Menu,
+    Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\Routing\Router,
+    Symfony\Component\DependencyInjection\ContainerInterface;
 
 class MainMenu extends Menu {
 	protected $request;
 	protected $router;
 	protected $container;
 	protected $user;
-	
+
 	/**
 	 * @param Request $request
 	 * @param Router $router
 	 * @param ContainerInterface $container A ContainerInterface instance
 	 */
 	public function __construct(Request $request, Router $router, ContainerInterface $container) {
-		parent::__construct();
-		
+		parent::__construct(array('class' => 'navigation'));
+
 		$this->request = $request;
 		$this->router = $router;
 		$this->container = $container;
 
 		$this->setCurrentUri($request->getRequestUri());
-		
+
 		$this->checkUser();
 		$this->addMenu();
 	}
-	
+
 	/**
 	 * Check is user logged-in
 	 */
@@ -51,7 +51,7 @@ class MainMenu extends Menu {
 			$this->user = $securityContext->getToken()->getUser();
 		}
 	}
-	
+
 	/**
 	 * Add menu items
 	 */
@@ -61,8 +61,10 @@ class MainMenu extends Menu {
 			$this->addChild('Login / Signin', $this->router->generate('_users_login'));
 		} else {
 			$this->addChild('Index', $this->router->generate('_index'));
+			
 			$this->addChild('Posts', $this->router->generate('_posts'));
-			$this->addChild('Add posts', $this->router->generate('_posts_add'));
+			$this['Posts']->addChild('Add posts', $this->router->generate('_posts_add'));
+
 			$this->addChild('Logout', '/logout'); // @TODO generate url dynamicly
 		}
 	}

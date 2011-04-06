@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.ini }
     - { resource: "@BlogWebBundle/Resources/config/menu.xml" }
     - { resource: "@BlogWebBundle/Resources/config/event_dispatcher.xml" }
+    - { resource: "@BlogWebBundle/Resources/config/services.xml" }
     - { resource: security.yml }
 
 framework:
@@ -54,7 +55,7 @@ doctrine:
                 mappings:
                     BlogWebBundle:
                         type: annotation
-                query_cache_driver: xcache
+                query_cache_driver: array
 
 # Swiftmailer Configuration
 swiftmailer:

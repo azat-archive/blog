@@ -22,14 +22,22 @@ class PostsController extends Controller {
 	 */
 	public function indexAction() {
 		$em = $this->getEm();
-		$posts = $em->getRepository('Blog\\WebBundle\\Entity\\Posts')->findAll();
+		
+		$qb = $em->createQueryBuilder()
+			   ->select('p', 'u')
+			   ->from('Blog\\WebBundle\\Entity\\Posts', 'p')
+			   ->join('p.user', 'u');
+		$q = $qb->getQuery();
+		$posts = $q->execute();
+		
 		return array('posts' => $posts);
 	}
 	
       /**
 	 * @extra:Routes({
-	 *	@extra:Route("/post/{pid}", name="_posts_show"),
-	 *	@extra:Route("/post/{pid}/comment/{cid}/edit", name="_posts_show_comments_edit")
+	 *	@extra:Route("/post/{pid}/", name="_posts_show"),
+	 *	@extra:Route("/post/{pid}/#comments", name="_posts_show_comments"),
+	 *	@extra:Route("/post/{pid}/edit-comment/{cid}", name="_posts_show_comments_edit")
 	 * })
 	 * @extra:Template()
 	 */

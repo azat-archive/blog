@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class: BlogBundle
+ * Class: BlogWebBundle
  * Date begin: Mar 16, 2011
  * 
  * Blog bundle

@@ -15,3 +15,52 @@ root {
 	display: block;
 }
 
+* {padding: 0; margin: 0;}
+table, img {border: 0;}
+html {font-size: 100.1%; height: 100%;}
+body {font: 100% Tahoma, Verdana, Arial; height: 100%; background: #fff;}
+.hidden {display: none;}
+a {color: #999999; text-decoration: none;}
+/*headers*/
+h1 {font: normal 3.6em "Trebuchet MS", Tahoma, Verdana, Arial;}
+h1 strong {font-weight: normal; color: #999999;}
+h2 {font: normal 2.4em "Trebuchet MS", Tahoma, Verdana, Arial; margin-bottom: 20px;}
+h2 strong {font-weight: normal; color: #999999;}
+h3 {margin-bottom: 5px;}
+h4 {font-size: 1.3em; margin-bottom: 3px;}
+/*\headers*/
+
+div#mainWrapper {margin: 0px auto; position: relative; width: 800px;}
+
+/*menu*/
+div#mainWrapper div#menu {float: left; margin-top: 40px; margin-right: 10px;}
+div#mainWrapper div#menu ul {list-style: none;}
+div#mainWrapper div#menu ul.navigation li {}
+div#mainWrapper div#menu ul.navigation li.current a {font-weight: bold;}
+div#mainWrapper div#menu ul.navigation li ul {margin-left: 10px;}
+div#mainWrapper div#menu ul.navigation li.current ul li a {font-weight: normal;}
+div#mainWrapper div#menu ul.navigation li.current ul li.current a {font-weight: bold;}
+/*\menu*/
+
+div#mainWrapper div#notMenuWrapper {float: left; margin: 0; width: 80%;}
+div#mainWrapper div#notMenuWrapper div#breadcrumbs {margin: 10px 0px 10px 0;}
+
+div#mainWrapper div#notMenuWrapper div#main div#content div.comment, div#mainWrapper div#notMenuWrapper div#main div#content div.post {border-bottom: 1px solid #ccc; margin-bottom: 15px;}
+div#mainWrapper div#notMenuWrapper div#main div#content div.comment p, div#mainWrapper div#notMenuWrapper div#main div#content div.post p {margin: 10px 0 10px 0;}
+
+/*forms*/
+div#mainWrapper div#notMenuWrapper div#main div#content form div ul {list-style: none; font-weight: bold; color: #000000;}
+div#mainWrapper div#notMenuWrapper div#main div#content form div {margin: 10px 0 10px 0;}
+div#mainWrapper div#notMenuWrapper div#main div#content form div label {color: #999999; clear: both; display: block;}
+div#mainWrapper div#notMenuWrapper div#main div#content form div textarea {width: 400px; height: 200px;}
+/*\forms*/
+
+/*paginator*/
+div.paginationControl {padding: 10px 0 0 0;}
+div.paginationControl ul {list-style: none; clear: both;}
+div.paginationControl ul li {float: left; padding-right: 10px;}
+/*\paginator*/
+
+/*labels*/
+h3.comments-label {margin: 5px;}
+/*\labels*/

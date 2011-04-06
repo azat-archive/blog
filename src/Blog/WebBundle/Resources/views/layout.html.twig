@@ -12,30 +12,37 @@
 	</head>
 
 	<body>
-		<div id="menu">
-			{{ menu('main') }}
-		</div>
-		
-		<div id="wrapper">
-			{% if error is defined %}
-			<div class="error"><h4>{{ error }}</h4></div>
-			{% endif %}
-			
-			{% if app.session.flash('notice') %}
-			<div class="flash-message">
-				<em>Notice</em>: {{ app.session.flash('notice') }}
-			</div>
-			{% endif %}
-
-			<div class="content">
-			{% block content %}
-			{% endblock %}
+		<div id="mainWrapper">
+			<div id="menu">
+				{{ menu('main') }}
 			</div>
 
-			{% if code is defined %}
-			<h2>Code behind this page</h2>
-			<div class="code-content">{{ code|raw }}</div>
-			{% endif %}
+			<div id="notMenuWrapper">
+				{# @todo breadcrumbs #}
+				<div id="breadcrumbs">&nbsp;</div> 
+				
+				<div id="main">
+					{% if error is defined %}
+					<div class="error"><h4>{{ error }}</h4></div>
+					{% endif %}
+
+					{% if app.session.flash('notice') %}
+					<div class="flash-message">
+						<em>Notice</em>: {{ app.session.flash('notice') }}
+					</div>
+					{% endif %}
+
+					<div id="content">
+					{% block content %}
+					{% endblock %}
+					</div>
+
+					{% if code is defined %}
+					<h2>Code behind this page</h2>
+					<div class="code-content">{{ code|raw }}</div>
+					{% endif %}
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

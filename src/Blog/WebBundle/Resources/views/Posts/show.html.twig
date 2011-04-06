@@ -3,8 +3,8 @@
 {% block content %}
 	<div class="post">
 		<a name="pid_{{ post.id }}"></a>
-		<h4 class="title">{{ post }}</h4>
-		<p class="content">{{ post.content }}</p>
+		<h4 class="title">{{ post|nl2br }}</h4>
+		<p class="content">{{ post.content|nl2br }}</p>
 		<p class="author">{{ post.user }}</p>
 
 		<div class="actions">

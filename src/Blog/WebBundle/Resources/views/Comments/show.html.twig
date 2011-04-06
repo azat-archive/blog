@@ -1,22 +1,27 @@
 <a name="comments"></a>
 
+{% if comments %}
+<h3 class="comments-label">Comments <span class="count">({{ comments|length }})</span></h3>
+
 <div id="comments">
 {% for comment in comments %}
 	<div class="comment">
 		<a name="cid_{{ comment.id }}"></a>
-		<p class="content">{{ comment }}</p>
+		<p class="content">{{ comment|nl2br }}</p>
 		<p class="author">{{ comment.user }}</p>
 		
 		<div class="actions">
 			{% if comment.canEdit(user) %}
-			<a href="{{ path('_comments_edit', { 'pid': comment.pid, 'cid': comment.id }) }}">Edit</a>
+			<a href="{{ path('_posts_show_comments_edit', { 'pid': comment.pid, 'cid': comment.id }) }}">Edit</a>
 			{% endif %}
 			{% if comment.canDelete(user) %}
 			<a href="{{ path('_comments_delete', { 'pid': comment.pid, 'cid': comment.id }) }}">Delete</a>
 			{% endif %}
 		</div>
 	</div>
-{% else %}
-	<h3 class="empty">No comments</h3>
 {% endfor %}
 </div>
+
+{% else %}
+	<h3 class="empty">No comments</h3>
+{% endif %}

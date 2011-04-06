@@ -22,7 +22,15 @@ class CommentsController extends Controller {
 	 */
 	public function showAction($pid) {
 		$em = $this->getEm();
-		$comments = $em->getRepository('Blog\\WebBundle\Entity\Comments')->findByPid($pid);
+		
+		$qb = $em->createQueryBuilder()
+			   ->select('c', 'u')
+			   ->from('Blog\\WebBundle\\Entity\\Comments', 'c')
+			   ->join('c.user', 'u')
+			   ->where('c.pid = :pid');
+		$q = $qb->setParameters(array('pid' => $pid))->getQuery();
+		$comments = $q->execute();
+		
 		return array('comments' => $comments);
 	}
 	
@@ -57,7 +65,7 @@ class CommentsController extends Controller {
 	}
 	
 	/**
-	 * @extra:Route("/post/{pid}/comment/{cid}/edit-post", name="_comments_edit")
+	 * @extra:Route("/post/{pid}/comment/{cid}/edit", name="_comments_edit")
 	 * @extra:Template()
 	 */
 	public function editAction($pid, $cid) {
