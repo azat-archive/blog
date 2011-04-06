@@ -62,6 +62,18 @@ class Users implements Entity, UserInterface, SimpleACL {
 	 * @validation:NotBlank()
 	 */
 	private $secondName;
+	/**
+	 * @var string $createTime
+	 *
+	 * @orm:Column(name="create_time", type="integer", length=10, nullable=false)
+	 */
+	private $createTime;
+	/**
+	 * @var string $createTime
+	 *
+	 * @orm:Column(name="last_login_time", type="integer", length=10, nullable=false)
+	 */
+	private $lastLoginTime;
 
 	
 	/**

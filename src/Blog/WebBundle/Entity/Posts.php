@@ -50,6 +50,18 @@ class Posts implements Entity, SimpleACL {
 	 * @orm:JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
 	 */
 	private $user;
+	/**
+	 * @var string $createTime
+	 *
+	 * @orm:Column(name="create_time", type="integer", length=10, nullable=false)
+	 */
+	private $createTime;
+	/**
+	 * @var string $createTime
+	 *
+	 * @orm:Column(name="edit_time", type="integer", length=10, nullable=false)
+	 */
+	private $editTime;
 
 	/**
 	 * Get id

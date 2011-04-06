@@ -58,6 +58,18 @@ class Comments implements Entity, SimpleACL {
 	 * @orm:JoinColumn(name="pid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
 	 */
 	private $post;
+	/**
+	 * @var string $createTime
+	 *
+	 * @orm:Column(name="create_time", type="integer", length=10, nullable=false)
+	 */
+	private $createTime;
+	/**
+	 * @var string $createTime
+	 *
+	 * @orm:Column(name="edit_time", type="integer", length=10, nullable=false)
+	 */
+	private $editTime;
 	
 	/**
 	 * Get id
