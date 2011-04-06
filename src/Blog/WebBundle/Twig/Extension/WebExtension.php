@@ -12,8 +12,10 @@
 
 namespace Blog\WebBundle\Twig\Extension;
 
-use Symfony\Component\HttpKernel\KernelInterface,
-    Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
+use	Symfony\Component\HttpKernel\KernelInterface,
+	Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
+
+use	Blog\WebBundle\Templating\Helper\Title as TitleHelper;
 
 class WebExtension extends \Twig_Extension {
 	protected $loader;
@@ -28,7 +30,7 @@ class WebExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * Returns a list of filters.
+	 * Returns a list of filters
 	 *
 	 * @return array
 	 */
@@ -37,6 +39,17 @@ class WebExtension extends \Twig_Extension {
 			'truncate' => new \Twig_Filter_Method($this, 'twig_truncate_filter', array('needs_environment' => true)),
 			'wordwrap' => new \Twig_Filter_Method($this, 'twig_wordwrap_filter', array('needs_environment' => true)),
 			'nl2br' => new \Twig_Filter_Method($this, 'twig_nl2br_filter', array('pre_escape' => 'html', 'is_safe' => array('html'))),
+		);
+	}
+
+	/**
+	 * Returns a list of functions
+	 *
+	 * @return array
+	 */
+	public function getFunctions() {
+		return array(
+			'title' => new \Twig_Function_Method($this, 'twig_title_function'),
 		);
 	}
 
@@ -86,5 +99,9 @@ class WebExtension extends \Twig_Extension {
 		}
 
 		return implode($separator, $sentences);
+	}
+	
+	public function twig_title_function() {
+		return (string)TitleHelper::getInstance();
 	}
 }

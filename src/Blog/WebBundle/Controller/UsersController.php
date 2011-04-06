@@ -40,19 +40,18 @@ class UsersController extends Controller {
 			$em = $this->getEm();
 			// check is user with such emails exists
 			$alreadyExistedUser = $em->getRepository('Blog\\WebBundle\\Entity\\Users')->findOneByEmail($user->getEmail());
-			if ($alreadyExistedUser) {
-				$this->get('session')->setFlash('notice', 'Such user already exists!');
-				return array('form' => $form);
+			if (!$alreadyExistedUser) {
+				$em->persist($user);
+				$em->flush();
+
+				$this->get('session')->setFlash('notice', 'Signup success!');
+				return $this->redirectGenerate('_index');
 			}
 			
-			
-			$em->persist($user);
-			$em->flush();
-			
-			$this->get('session')->setFlash('notice', 'Signup success!');
-			return $this->redirectGenerate('_index');
+			$this->get('session')->setFlash('notice', 'Such user already exists!');
 		}
 
+		$this->addTitle('Users', 'Signup');
 		return array('form' => $form);
 	}
 	
@@ -76,6 +75,7 @@ class UsersController extends Controller {
 			$error = $error->getMessage();
 		}
 		
+		$this->addTitle('Users', 'Login');
 		return array('form' => $form, 'error' => $error);
 	}
 	

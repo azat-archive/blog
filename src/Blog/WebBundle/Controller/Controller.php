@@ -17,6 +17,8 @@ use	Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController,
 	Symfony\Component\Security\Core\SecurityContext,
 	Symfony\Component\HttpFoundation\RedirectResponse;
 
+use	Blog\WebBundle\Templating\Helper\Title as TitleHelper;
+
 abstract class Controller extends BaseController {
 	private $em;
 	private $user;
@@ -36,6 +38,8 @@ abstract class Controller extends BaseController {
 		$this->template = $this->get('twig');
 		// append user variable
 		$this->template->addGlobal('user', $this->user);
+		// add default title
+		$this->addTitle('Blog');
 	}
 	
 	/**
@@ -50,6 +54,15 @@ abstract class Controller extends BaseController {
 		} else {
 			return new RedirectResponse(call_user_func_array(array(&$this, 'generateUrl'), $args));
 		}
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function setContainer(ContainerInterface $container = null) {
+		parent::setContainer($container);
+		
+		$this->_init();
 	}
 	
 	/**
@@ -80,11 +93,12 @@ abstract class Controller extends BaseController {
 	}
 	
 	/**
+	 * Add title
+	 * 
 	 * {@inheritdoc}
 	 */
-	public function setContainer(ContainerInterface $container = null) {
-		parent::setContainer($container);
-		
-		$this->_init();
+	protected function addTitle() {
+		$args = func_get_args();
+		return call_user_func_array(array(TitleHelper::getInstance(), 'add'), $args);
 	}
 }

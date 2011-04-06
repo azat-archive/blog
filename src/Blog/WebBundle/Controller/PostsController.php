@@ -30,6 +30,7 @@ class PostsController extends Controller {
 		$q = $qb->getQuery();
 		$posts = $q->execute();
 		
+		$this->addTitle('Posts');
 		return array('posts' => $posts);
 	}
 	
@@ -49,6 +50,7 @@ class PostsController extends Controller {
 			throw ExceptionController::notFound('The post does not exist.');
 		}
 		
+		$this->addTitle('Posts', $post);
 		return array('post' => $post, 'commentEdit' => $cid);
 	}
 	
@@ -71,6 +73,7 @@ class PostsController extends Controller {
 			return $this->redirectGenerate('_posts');
 		}
 
+		$this->addTitle('Posts', 'Add post');
 		return array('form' => $form);
 	}
 	
@@ -96,6 +99,7 @@ class PostsController extends Controller {
 			return $this->redirectGenerate('_posts');
 		}
 
+		$this->addTitle('Posts', 'Edit post', $post);
 		return array('form' => $form);
 	}
 	

@@ -70,23 +70,23 @@ class CommentsController extends Controller {
 	 */
 	public function editAction($pid, $cid) {
 		$em = $this->getEm();
-		$commentEdit = $em->find('Blog\\WebBundle\\Entity\\Comments', $cid);
+		$comment = $em->find('Blog\\WebBundle\\Entity\\Comments', $cid);
 		// not found
-		if (!$commentEdit) {
+		if (!$comment) {
 			throw ExceptionController::notFound('The comment does not exist.');
 		}
 		$form = CommentsAddForm::create($this->get('form.context'), 'comments_edit');
 		
-		$form->bind($this->get('request'), $commentEdit);
+		$form->bind($this->get('request'), $comment);
 		if ($form->isValid()) {
-			$commentEdit->setEditTime(time());
-			$em->persist($commentEdit);
+			$comment->setEditTime(time());
+			$em->persist($comment);
 			$em->flush();
 			
 			return $this->redirectGenerate('_posts_show', array('pid' => $pid));
 		}
 		
-		return array('form' => $form, 'pid' => $pid, 'commentEdit' => $commentEdit);
+		return array('form' => $form, 'pid' => $pid, 'commentEdit' => $comment);
 	}
 	
 	/**
