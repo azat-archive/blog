@@ -8,8 +8,6 @@ use	Blog\WebBundle\ACL\SimpleACL,
 /**
  * Blog\WebBundle\Entity\Posts
  * 
- * @todo add create/edit/delete time
- * 
  * @orm:Table(name="posts")
  * @orm:Entity
  */
@@ -45,12 +43,6 @@ class Posts implements Entity, SimpleACL {
 	 */
 	private $uid;
 	/**
-	 * @orm:InheritanceType("JOINED")
-	 * @orm:OneToOne(targetEntity="Users")
-	 * @orm:JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-	 */
-	private $user;
-	/**
 	 * @var string $createTime
 	 *
 	 * @orm:Column(name="create_time", type="integer", length=10, nullable=false)
@@ -62,6 +54,17 @@ class Posts implements Entity, SimpleACL {
 	 * @orm:Column(name="edit_time", type="integer", length=10, nullable=false)
 	 */
 	private $editTime;
+	/**
+	 * @orm:InheritanceType("JOINED")
+	 * @orm:OneToOne(targetEntity="Users")
+	 * @orm:JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+	 */
+	private $user;
+	
+	
+	public function __construct() {
+		$this->createTime = time();
+	}
 
 	/**
 	 * Get id
@@ -130,6 +133,46 @@ class Posts implements Entity, SimpleACL {
 	 */
 	public function getUid() {
 		return $this->uid;
+	}
+	
+	/**
+	 * Set createTime
+	 * 
+	 * @param integer $createTime
+	 * @return Posts
+	 */
+	public function setCreateTime($createTime) {
+		$this->createTime = $createTime;
+		return $this;
+	}
+	
+	/**
+	 * Get createTime
+	 * 
+	 * @return integer $createTime
+	 */
+	public function getCreateTime() {
+		return $this->createTime;
+	}
+	
+	/**
+	 * Set editTime
+	 * 
+	 * @param integer $editTime
+	 * @return Posts
+	 */
+	public function setEditTime($editTime) {
+		$this->editTime = $editTime;
+		return $this;
+	}
+	
+	/**
+	 * Get editTime
+	 * 
+	 * @return integer $editTime
+	 */
+	public function getEditTime() {
+		return $this->editTime;
 	}
 
 	/**

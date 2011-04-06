@@ -89,6 +89,7 @@ class PostsController extends Controller {
 		
 		$form->bind($this->get('request'), $post);
 		if ($form->isValid()) {
+			$post->setEditTime(time());
 			$em->persist($post);
 			$em->flush();
 			

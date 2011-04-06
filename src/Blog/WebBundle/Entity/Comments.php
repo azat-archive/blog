@@ -8,8 +8,6 @@ use	Blog\WebBundle\ACL\SimpleACL,
 /**
  * Blog\WebBundle\Entity\Comments
  * 
- * @todo add create/edit/delete time
- * 
  * @orm:Table(name="comments")
  * @orm:Entity
  */
@@ -38,26 +36,12 @@ class Comments implements Entity, SimpleACL {
 	 */
 	private $uid;
 	/**
-	 * @orm:InheritanceType("JOINED")
-	 * @orm:OneToOne(targetEntity="Users")
-	 * @orm:JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-	 * 
-	 * @todo check if ONDELETE will delete user too
-	 */
-	private $user;
-	/**
 	 * @var integer $pid
 	 *
 	 * @orm:Column(name="pid", type="integer", nullable=false)
 	 * @assert:Int()
 	 */
 	private $pid;
-	/**
-	 * @orm:InheritanceType("JOINED")
-	 * @orm:ManyToOne(targetEntity="Posts", inversedBy="Comments")
-	 * @orm:JoinColumn(name="pid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-	 */
-	private $post;
 	/**
 	 * @var string $createTime
 	 *
@@ -70,6 +54,24 @@ class Comments implements Entity, SimpleACL {
 	 * @orm:Column(name="edit_time", type="integer", length=10, nullable=false)
 	 */
 	private $editTime;
+	/**
+	 * @orm:InheritanceType("JOINED")
+	 * @orm:OneToOne(targetEntity="Users")
+	 * @orm:JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+	 * 
+	 * @todo check if ONDELETE will delete user too
+	 */
+	private $user;
+	/**
+	 * @orm:InheritanceType("JOINED")
+	 * @orm:ManyToOne(targetEntity="Posts", inversedBy="Comments")
+	 * @orm:JoinColumn(name="pid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+	 */
+	private $post;
+	
+	public function __construct() {
+		$this->createTime = time();
+	}
 	
 	/**
 	 * Get id
@@ -138,6 +140,46 @@ class Comments implements Entity, SimpleACL {
 	 */
 	public function getPid() {
 		return $this->pid;
+	}
+	
+	/**
+	 * Set createTime
+	 * 
+	 * @param integer $createTime
+	 * @return Comments
+	 */
+	public function setCreateTime($createTime) {
+		$this->createTime = $createTime;
+		return $this;
+	}
+	
+	/**
+	 * Get createTime
+	 * 
+	 * @return integer $createTime
+	 */
+	public function getCreateTime() {
+		return $this->createTime;
+	}
+	
+	/**
+	 * Set editTime
+	 * 
+	 * @param integer $editTime
+	 * @return Comments
+	 */
+	public function setEditTime($editTime) {
+		$this->editTime = $editTime;
+		return $this;
+	}
+	
+	/**
+	 * Get editTime
+	 * 
+	 * @return integer $editTime
+	 */
+	public function getEditTime() {
+		return $this->editTime;
 	}
 
 	/**

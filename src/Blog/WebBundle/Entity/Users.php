@@ -12,8 +12,6 @@ use	Blog\WebBundle\ACL\SimpleACL,
 /**
  * Blog\WebBundle\Entity\Users
  * 
- * @todo add create/edit/delete time
- * 
  * @orm:Table(name="users")
  * @orm:Entity
  */
@@ -75,6 +73,10 @@ class Users implements Entity, UserInterface, SimpleACL {
 	 */
 	private $lastLoginTime;
 
+	
+	public function __construct() {
+		$this->createTime = time();
+	}
 	
 	/**
 	 * Get id
@@ -185,6 +187,46 @@ class Users implements Entity, UserInterface, SimpleACL {
 	 */
 	public function getSecondName() {
 		return $this->secondName;
+	}
+	
+	/**
+	 * Set createTime
+	 * 
+	 * @param integer $createTime
+	 * @return Users
+	 */
+	public function setCreateTime($createTime) {
+		$this->createTime = $createTime;
+		return $this;
+	}
+	
+	/**
+	 * Get createTime
+	 * 
+	 * @return integer $createTime
+	 */
+	public function getCreateTime() {
+		return $this->createTime;
+	}
+	
+	/**
+	 * Set lastLoginTime
+	 * 
+	 * @param integer $lastLoginTime
+	 * @return Users
+	 */
+	public function setLastLoginTime($lastLoginTime) {
+		$this->lastLoginTime = $lastLoginTime;
+		return $this;
+	}
+	
+	/**
+	 * Get lastLoginTime
+	 * 
+	 * @return integer $lastLoginTime
+	 */
+	public function getLastLoginTime() {
+		return $this->lastLoginTime;
 	}
 	
 	/**

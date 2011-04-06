@@ -79,6 +79,7 @@ class CommentsController extends Controller {
 		
 		$form->bind($this->get('request'), $commentEdit);
 		if ($form->isValid()) {
+			$commentEdit->setEditTime(time());
 			$em->persist($commentEdit);
 			$em->flush();
 			
