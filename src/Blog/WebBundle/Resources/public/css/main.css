@@ -70,3 +70,7 @@ div.meta {width: 100%;}
 div.meta .create {width: 50%; display: block; float: left;}
 div.actions {clear: both;}
 /*\meta / actions*/
+
+/*userPanel*/
+div#userPanel {width: 150px; overflow: hidden; margin-top: 40px;}
+/*\userPanel*/

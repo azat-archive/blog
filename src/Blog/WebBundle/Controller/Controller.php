@@ -58,7 +58,7 @@ abstract class Controller extends BaseController {
 		
 		$this->template = $this->get('twig');
 		// append user variable
-		$this->template->addGlobal('user', $this->user);
+		$this->template->addGlobal('currentUser', $this->user);
 		// add default title
 		$this->addTitle('Blog');
 		

@@ -17,10 +17,10 @@
 			{% endif %}
 		</div>
 		<div class="actions">
-			{% if comment.canEdit(user) %}
+			{% if comment.canEdit(currentUser) %}
 			<a href="{{ path('_posts_show_comments_edit', { 'pid': comment.pid, 'cid': comment.id }) }}">Edit</a>
 			{% endif %}
-			{% if comment.canDelete(user) %}
+			{% if comment.canDelete(currentUser) %}
 			<a class="confirmDialog" href="{{ path('_comments_delete', { 'pid': comment.pid, 'cid': comment.id }) }}">Delete</a>
 			{% endif %}
 		</div>

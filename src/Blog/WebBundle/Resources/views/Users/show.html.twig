@@ -1,0 +1,22 @@
+{% extends 'BlogWebBundle::layout.html.twig' %}
+
+{% block content %}
+	<div class="user">
+		<strong>{{ user }}</strong>
+		
+		<div class="meta">
+			<span class="create">Create: <strong>{{ user.createTime|date }}</strong></span>
+			{%if user.lastLoginTime %}
+			<span class="lastVisit">Last visit: <strong>{{ user.lastLoginTime|date }}</strong></span>
+			{% endif %}
+		</div>
+		<div class="actions">
+			{% if user.canEdit(currentUser) %}
+			<a href="{{ path('_users_edit', { 'uid': user.id }) }}">Edit</a>
+			{% endif %}
+			{% if user.canDelete(currentUser) %}
+			<a class="confirmDialog" href="{{ path('_users_delete', { 'uid': user.id }) }}">Delete</a>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

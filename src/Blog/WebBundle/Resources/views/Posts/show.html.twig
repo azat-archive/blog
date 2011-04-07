@@ -14,10 +14,10 @@
 			{% endif %}
 		</div>
 		<div class="actions">
-			{% if post.canEdit(user) %}
+			{% if post.canEdit(currentUser) %}
 			<a href="{{ path('_posts_edit', { 'pid': post.id }) }}">Edit</a>
 			{% endif %}
-			{% if post.canDelete(user) %}
+			{% if post.canDelete(currentUser) %}
 			<a class="confirmDialog" href="{{ path('_posts_delete', { 'pid': post.id }) }}">Delete</a>
 			{% endif %}
 		</div>
