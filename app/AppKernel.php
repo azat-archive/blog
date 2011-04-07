@@ -16,6 +16,7 @@ class AppKernel extends Kernel {
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
 			new Knplabs\Bundle\MenuBundle\KnplabsMenuBundle(),
+			new Knplabs\Bundle\PaginatorBundle\KnplabsPaginatorBundle(),
 			
 			// app bundles
 			new Blog\WebBundle\BlogWebBundle(),

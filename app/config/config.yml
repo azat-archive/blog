@@ -71,3 +71,7 @@ jms_security_extra:
 # Menu
 knplabs_menu:
     twig: true
+
+# Paginator
+knplabs_paginator: 
+    templating: ~

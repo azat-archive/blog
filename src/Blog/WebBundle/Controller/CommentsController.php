@@ -17,7 +17,7 @@ use	Blog\WebBundle\Form\CommentsAdd as CommentsAddForm,
 
 class CommentsController extends Controller {
       /**
-	 * @extra:Route("/post/{pid}/show-comments", name="_comments_show")
+	 * @extra:Route("/post/{pid}/show-comments", requirements={"pid" = "\d+"}, name="_comments_show")
 	 * @extra:Template()
 	 */
 	public function showAction($pid) {
@@ -35,7 +35,7 @@ class CommentsController extends Controller {
 	}
 	
       /**
-	 * @extra:Route("/post/{pid}/add-comment", name="_comments_add")
+	 * @extra:Route("/post/{pid}/add-comment", requirements={"pid" = "\d+"}, name="_comments_add")
 	 * @extra:Template()
 	 */
 	public function addAction($pid) {
@@ -65,7 +65,7 @@ class CommentsController extends Controller {
 	}
 	
 	/**
-	 * @extra:Route("/post/{pid}/comment/{cid}/edit", name="_comments_edit")
+	 * @extra:Route("/post/{pid}/comment/{cid}/edit", requirements={"pid" = "\d+", "cid" = "\d+"}, name="_comments_edit")
 	 * @extra:Template()
 	 */
 	public function editAction($pid, $cid) {
@@ -90,7 +90,7 @@ class CommentsController extends Controller {
 	}
 	
 	/**
-	 * @extra:Route("/post/{pid}/comment/{cid}/delete", name="_comments_delete")
+	 * @extra:Route("/post/{pid}/comment/{cid}/delete", requirements={"pid" = "\d+", "cid" = "\d+"}, name="_comments_delete")
 	 */
 	public function deleteAction($pid, $cid) {
 		$em = $this->getEm();

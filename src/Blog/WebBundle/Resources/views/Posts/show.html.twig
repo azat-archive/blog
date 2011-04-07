@@ -7,6 +7,12 @@
 		<p class="content">{{ post.content|nl2br }}</p>
 		<p class="author">{{ post.user }}</p>
 
+		<div class="meta">
+			<span class="create">Create: <strong>{{ post.createTime|date }}</strong></span>
+			{%if post.editTime %}
+			<span class="edit">Edit: <strong>{{ post.editTime|date }}</strong></span>
+			{% endif %}
+		</div>
 		<div class="actions">
 			{% if post.canEdit(user) %}
 			<a href="{{ path('_posts_edit', { 'pid': post.id }) }}">Edit</a>

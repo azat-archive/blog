@@ -12,6 +12,7 @@ $loader->registerNamespaces(array(
 	'Doctrine' => __DIR__ . '/../vendor/doctrine/lib',
 	'Monolog' => __DIR__ . '/../vendor/monolog/src',
 	'Assetic' => __DIR__ . '/../vendor/assetic/src',
+	'Zend' => __DIR__ . '/../vendor/zend/lib',
 	'Knplabs' => __DIR__ . '/../vendor/bundles',
 	// app namespaces
 	'Blog' => __DIR__ . '/../src',

@@ -17,28 +17,44 @@ use	Blog\WebBundle\Form\PostsAdd as PostsAddForm,
 
 class PostsController extends Controller {
       /**
-	 * @extra:Route("/posts/", name="_posts")
+	 * @extra:Route("/posts/{pageLabel}/{page}/", name="_posts", requirements={"page" = "\d+", "pageLabel" = "page"}, defaults={"page" = 1, "pageLabel" = "page"})
 	 * @extra:Template()
+	 * 
+	 * @todo SQL_CALC_FOUND_ROWS
 	 */
-	public function indexAction() {
+	public function indexAction($pageLabel, $page) {
 		$em = $this->getEm();
 		
+		// fetch posts
 		$qb = $em->createQueryBuilder()
 			   ->select('p', 'u')
 			   ->from('Blog\\WebBundle\\Entity\\Posts', 'p')
 			   ->join('p.user', 'u');
 		$q = $qb->getQuery();
-		$posts = $q->execute();
 		
+		// get posts num (without join tables)
+		$num = $em->createQueryBuilder()
+			    ->select('COUNT(p)')
+			    ->from('Blog\\WebBundle\\Entity\\Posts', 'p')
+			    ->setMaxResults(1)
+			    ->getQuery()
+			    ->getSingleScalarResult();
+		
+		// paginator
+		$paginatorAdapter = $this->getPaginatorAdapter()
+						 ->setQuery($q, $num)
+						 ->setDistinct(true);
+		$paginator = $this->createPaginator($paginatorAdapter);
+
 		$this->addTitle('Posts');
-		return array('posts' => $posts);
+		return array('paginator' => $paginator);
 	}
 	
       /**
 	 * @extra:Routes({
-	 *	@extra:Route("/post/{pid}/", name="_posts_show"),
+	 *	@extra:Route("/post/{pid}/", requirements={"pid" = "\d+"}, name="_posts_show"),
 	 *	@extra:Route("/post/{pid}/#comments", name="_posts_show_comments"),
-	 *	@extra:Route("/post/{pid}/edit-comment/{cid}", name="_posts_show_comments_edit")
+	 *	@extra:Route("/post/{pid}/edit-comment/{cid}", requirements={"pid" = "\d+", "cid" = "\d+"}, name="_posts_show_comments_edit")
 	 * })
 	 * @extra:Template()
 	 */
@@ -70,7 +86,7 @@ class PostsController extends Controller {
 			$em->persist($post);
 			$em->flush();
 			
-			return $this->redirectGenerate('_posts');
+			return $this->redirectGenerate('_posts_show', array('pid' => $post->getId()));
 		}
 
 		$this->addTitle('Posts', 'Add post');
@@ -78,7 +94,7 @@ class PostsController extends Controller {
 	}
 	
 	/**
-	 * @extra:Route("/post/{pid}/edit", name="_posts_edit")
+	 * @extra:Route("/post/{pid}/edit", requirements={"pid" = "\d+"}, name="_posts_edit")
 	 * @extra:Template()
 	 */
 	public function editAction($pid) {
@@ -96,7 +112,7 @@ class PostsController extends Controller {
 			$em->persist($post);
 			$em->flush();
 			
-			return $this->redirectGenerate('_posts');
+			return $this->redirectGenerate('_posts_show', array('pid' => $pid));
 		}
 
 		$this->addTitle('Posts', 'Edit post', $post);

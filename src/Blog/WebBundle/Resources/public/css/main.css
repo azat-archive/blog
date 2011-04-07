@@ -56,11 +56,17 @@ div#mainWrapper div#notMenuWrapper div#main div#content form div textarea {width
 /*\forms*/
 
 /*paginator*/
-div.paginationControl {padding: 10px 0 0 0;}
-div.paginationControl ul {list-style: none; clear: both;}
-div.paginationControl ul li {float: left; padding-right: 10px;}
+div.pagination {padding: 10px 0 0 0;}
+div.pagination ul {list-style: none; clear: both;}
+div.pagination ul li {float: left; padding-right: 10px;}
 /*\paginator*/
 
 /*labels*/
 h3.comments-label {margin: 5px;}
 /*\labels*/
+
+/*meta / actions*/
+div.meta {width: 100%;}
+div.meta .create {width: 50%; display: block; float: left;}
+div.actions {clear: both;}
+/*\meta / actions*/

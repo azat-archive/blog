@@ -20,9 +20,30 @@ use	Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController,
 use	Blog\WebBundle\Templating\Helper\Title as TitleHelper;
 
 abstract class Controller extends BaseController {
+	/**
+	 * Entity manager
+	 *
+	 * @var Doctrine\ORM\EntityManager
+	 */
 	private $em;
+	/**
+	 * User
+	 *
+	 * @var Blog\WebBundle\Entity\Users
+	 */
 	private $user;
+	/**
+	 * Template
+	 *
+	 * @var Twig_Environment
+	 */
 	private $template;
+	/**
+	 * Doctrine paginator adapter
+	 *
+	 * @var \Knplabs\Bundle\PaginatorBundle\Paginator\Adapter\Doctrine
+	 */
+	private $paginatorAdapter;
 	
 	/**
 	 * Init vars
@@ -40,6 +61,8 @@ abstract class Controller extends BaseController {
 		$this->template->addGlobal('user', $this->user);
 		// add default title
 		$this->addTitle('Blog');
+		
+		$this->paginatorAdapter = $this->container->get('knplabs_paginator.adapter');
 	}
 	
 	/**
@@ -100,5 +123,29 @@ abstract class Controller extends BaseController {
 	protected function addTitle() {
 		$args = func_get_args();
 		return call_user_func_array(array(TitleHelper::getInstance(), 'add'), $args);
+	}
+	
+	/**
+	 * Get paginator adapter
+	 *
+	 * @return \Knplabs\Bundle\PaginatorBundle\Paginator\Adapter\Doctrine
+	 */
+	protected function getPaginatorAdapter() {
+		return $this->paginatorAdapter;
+	}
+	
+	/**
+	 * Create paginator
+	 *
+	 * @param \Knplabs\Bundle\PaginatorBundle\Paginator\Adapter\Doctrine $adapter 
+	 * @return \Zend\Paginator\Paginator
+	 */
+	protected function createPaginator(\Knplabs\Bundle\PaginatorBundle\Paginator\Adapter\Doctrine $adapter) {
+		$paginator = new \Zend\Paginator\Paginator($adapter);
+		$paginator->setItemCountPerPage(20);
+		$paginator->setPageRange(5);
+		$paginator->setCurrentPageNumber($this->container->get('request')->get('page'));
+		
+		return $paginator;
 	}
 }

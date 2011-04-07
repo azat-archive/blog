@@ -2,7 +2,7 @@
 
 {% block content %}
 	<div id="posts">
-	{% for post in posts %}
+	{% for post in paginator %}
 		<div class="post">
 			<a name="pid_{{ post.id }}"></a>
 			<a class="title" href="{{ path('_posts_show', { 'pid': post.id }) }}">{{ post }}</a>
@@ -10,6 +10,12 @@
 			<p class="content">{{ post.content|truncate(250)|nl2br }}</p>
 			<p class="author">{{ post.user }}</p>
 			
+			<div class="meta">
+				<span class="create">Create: <strong>{{ post.createTime|date }}</strong></span>
+				{%if post.editTime %}
+				<span class="edit">Edit: <strong>{{ post.editTime|date }}</strong></span>
+				{% endif %}
+			</div>
 			<div class="actions">
 				<a href="{{ path('_posts_show_comments', { 'pid': post.id }) }}">Comments</a>
 				{% if post.canEdit(user) %}
@@ -23,5 +29,9 @@
 	{% else %}
 		<h3 class="empty">No posts</h3>
 	{% endfor %}
+	</div>
+
+	<div class="paginator">
+	    {{ paginator_render(paginator)|raw }}
 	</div>
 {% endblock %}

@@ -10,6 +10,12 @@
 		<p class="content">{{ comment|nl2br }}</p>
 		<p class="author">{{ comment.user }}</p>
 		
+		<div class="meta">
+			<span class="create">Create: <strong>{{ comment.createTime|date }}</strong></span>
+			{%if comment.editTime %}
+			<span class="edit">Edit: <strong>{{ comment.editTime|date }}</strong></span>
+			{% endif %}
+		</div>
 		<div class="actions">
 			{% if comment.canEdit(user) %}
 			<a href="{{ path('_posts_show_comments_edit', { 'pid': comment.pid, 'cid': comment.id }) }}">Edit</a>

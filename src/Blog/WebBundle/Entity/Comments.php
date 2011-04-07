@@ -71,6 +71,7 @@ class Comments implements Entity, SimpleACL {
 	
 	public function __construct() {
 		$this->createTime = time();
+		$this->editTime = 0;
 	}
 	
 	/**

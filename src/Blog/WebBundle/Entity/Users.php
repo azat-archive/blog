@@ -76,6 +76,7 @@ class Users implements Entity, UserInterface, SimpleACL {
 	
 	public function __construct() {
 		$this->createTime = time();
+		$this->lastLoginTime = 0;
 	}
 	
 	/**
