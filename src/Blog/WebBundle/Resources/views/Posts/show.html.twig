@@ -18,7 +18,7 @@
 			<a href="{{ path('_posts_edit', { 'pid': post.id }) }}">Edit</a>
 			{% endif %}
 			{% if post.canDelete(user) %}
-			<a href="{{ path('_posts_delete', { 'pid': post.id }) }}">Delete</a>
+			<a class="confirmDialog" href="{{ path('_posts_delete', { 'pid': post.id }) }}">Delete</a>
 			{% endif %}
 		</div>
 	</div>

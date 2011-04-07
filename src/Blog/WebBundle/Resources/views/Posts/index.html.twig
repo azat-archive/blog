@@ -9,7 +9,7 @@
 			{# @todo add substr method #}
 			<p class="content">{{ post.content|truncate(250)|nl2br }}</p>
 			<p class="author">{{ post.user }}</p>
-			
+
 			<div class="meta">
 				<span class="create">Create: <strong>{{ post.createTime|date }}</strong></span>
 				{%if post.editTime %}
@@ -22,7 +22,7 @@
 				<a href="{{ path('_posts_edit', { 'pid': post.id }) }}">Edit</a>
 				{% endif %}
 				{% if post.canDelete(user) %}
-				<a href="{{ path('_posts_delete', { 'pid': post.id }) }}">Delete</a>
+				<a class="confirmDialog" href="{{ path('_posts_delete', { 'pid': post.id }) }}">Delete</a>
 				{% endif %}
 			</div>
 		</div>
