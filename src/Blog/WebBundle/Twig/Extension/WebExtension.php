@@ -39,6 +39,7 @@ class WebExtension extends \Twig_Extension {
 			'truncate' => new \Twig_Filter_Method($this, 'twig_truncate_filter', array('needs_environment' => true)),
 			'wordwrap' => new \Twig_Filter_Method($this, 'twig_wordwrap_filter', array('needs_environment' => true)),
 			'nl2br' => new \Twig_Filter_Method($this, 'twig_nl2br_filter', array('pre_escape' => 'html', 'is_safe' => array('html'))),
+			'date' => new \Twig_Filter_Method($this, 'twig_date_filter'),
 		);
 	}
 
@@ -103,5 +104,26 @@ class WebExtension extends \Twig_Extension {
 	
 	public function twig_title_function() {
 		return (string)TitleHelper::getInstance();
+	}
+	
+	public function twig_date_filter($unixtimeStamp) {
+		if (!$unixtimeStamp) {
+			// return null; // ?
+			return 'no';
+		}
+		
+		if ($unixtimeStamp <= time()) {
+			if ($unixtimeStamp >= strtotime('-1 hour')) return 'now';
+			if ($unixtimeStamp >= strtotime('-1 day')) return 'today';
+			if ($unixtimeStamp >= strtotime('-2 day')) return 'yesterday';
+		}
+		if ($unixtimeStamp >= time() && $unixtimeStamp <= strtotime('+1 day')) {
+			return 'tomorrow';
+		}
+		// current year
+		if (date('Y', $unixtimeStamp) == date('Y')) {
+			return date('j F', $unixtimeStamp);
+		}
+		return date('j F Y', $unixtimeStamp);
 	}
 }
