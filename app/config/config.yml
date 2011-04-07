@@ -1,8 +1,7 @@
 imports:
     - { resource: parameters.ini }
     - { resource: "@BlogWebBundle/Resources/config/menu.xml" }
-    - { resource: "@BlogWebBundle/Resources/config/event_dispatcher.xml" }
-    - { resource: "@BlogWebBundle/Resources/config/services.xml" }
+    - { resource: "@BlogWebBundle/Resources/config/listener.xml" }
     - { resource: security.yml }
 
 framework:

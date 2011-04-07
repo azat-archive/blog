@@ -18,14 +18,34 @@ use	Symfony\Component\HttpKernel\KernelInterface,
 use	Blog\WebBundle\Templating\Helper\Title as TitleHelper;
 
 class WebExtension extends \Twig_Extension {
+	/**
+	 * Loader
+	 *
+	 * @var FilesystemLoader
+	 */
 	protected $loader;
+	/**
+	 * Controller
+	 *
+	 * @var array
+	 */
 	protected $controller;
 
+	/**
+	 * Loader
+	 *
+	 * @param FilesystemLoader $loader 
+	 */
 	public function __construct(FilesystemLoader $loader) {
 		$this->loader = $loader;
 	}
 
-	public function setController($controller) {
+	/**
+	 * Controller
+	 *
+	 * @param array $controller 
+	 */
+	public function setController(array $controller) {
 		$this->controller = $controller;
 	}
 
@@ -63,10 +83,27 @@ class WebExtension extends \Twig_Extension {
 		return 'web';
 	}
 
+	/**
+	 * nl2br alias
+	 *
+	 * @param mixed $value
+	 * @param string $sep
+	 * @return string
+	 */
 	public function twig_nl2br_filter($value, $sep = '<br />') {
 		return str_replace("\n", $sep . "\n", $value);
 	}
 
+	/**
+	 * Truncate filter
+	 *
+	 * @param \Twig_Environment $env
+	 * @param mixed $value
+	 * @param int $length
+	 * @param bool $preserve
+	 * @param string $separator
+	 * @return string
+	 */
 	public function twig_truncate_filter(\Twig_Environment $env, $value, $length = 30, $preserve = false, $separator = '...') {
 		if (mb_strlen($value, $env->getCharset()) > $length) {
 			if ($preserve) {
@@ -81,6 +118,16 @@ class WebExtension extends \Twig_Extension {
 		return $value;
 	}
 
+	/**
+	 * Wordwrap filter
+	 *
+	 * @param \Twig_Environment $env
+	 * @param mixed $value
+	 * @param int $length
+	 * @param string $separator
+	 * @param bool $preserve
+	 * @return string
+	 */
 	public function twig_wordwrap_filter(\Twig_Environment $env, $value, $length = 80, $separator = "\n", $preserve = false) {
 		$sentences = array();
 
@@ -102,10 +149,22 @@ class WebExtension extends \Twig_Extension {
 		return implode($separator, $sentences);
 	}
 	
+	/**
+	 * Title function
+	 *
+	 * @see Blog\WebBundle\Templating\Helper\Title
+	 * @return string
+	 */
 	public function twig_title_function() {
 		return (string)TitleHelper::getInstance();
 	}
 	
+	/**
+	 * Date filter
+	 *
+	 * @param int $unixtimeStamp
+	 * @return string
+	 */
 	public function twig_date_filter($unixtimeStamp) {
 		if (!$unixtimeStamp) {
 			// return null; // ?

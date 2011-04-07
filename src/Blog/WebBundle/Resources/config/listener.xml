@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="blog.web.twig.extension.class">Blog\WebBundle\Twig\Extension\WebExtension</parameter>
+		<parameter key="blog.web.listener.class">Blog\WebBundle\Listener\Controller</parameter>
+		<parameter key="blog.web.security.interactive_login_listener.class">Blog\WebBundle\Listener\SecurityInteractiveLogin</parameter>
+	</parameters>
+
+	<services>
+		<service id="twig.extension.blog.web" class="%blog.web.twig.extension.class%" public="false">
+			<tag name="twig.extension" />
+			<argument type="service" id="twig.loader" />
+		</service>
+
+		<service id="blog.web.listener" class="%blog.web.listener.class%">
+			<tag name="kernel.listener" event="onCoreController" />
+			<argument type="service" id="twig.extension.blog.web" />
+		</service>
+
+		<service id="blog.web.security.interactive_login_listener" class="%blog.web.security.interactive_login_listener.class%">
+			<argument type="service" id="doctrine.orm.entity_manager" />
+			<tag name="kernel.listener" event="onSecurityInteractiveLogin" priority="0" />
+		</service>
+	</services>
+</container>
