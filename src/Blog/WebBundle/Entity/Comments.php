@@ -58,8 +58,6 @@ class Comments implements Entity, SimpleACL {
 	 * @orm:InheritanceType("JOINED")
 	 * @orm:OneToOne(targetEntity="Users")
 	 * @orm:JoinColumn(name="uid", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-	 * 
-	 * @todo check if ONDELETE will delete user too
 	 */
 	private $user;
 	/**

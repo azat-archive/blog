@@ -17,7 +17,7 @@ use	Blog\WebBundle\Form\CommentsAdd as CommentsAddForm,
 
 class CommentsController extends Controller {
       /**
-	 * @extra:Route("/post/{pid}/show-comments", requirements={"pid" = "\d+"}, name="_comments_show")
+	 * @extra:Route("/post/{pid}/show-comments", name="_comments_show", requirements={"pid" = "\d+"})
 	 * @extra:Template()
 	 */
 	public function showAction($pid) {
@@ -35,7 +35,7 @@ class CommentsController extends Controller {
 	}
 	
       /**
-	 * @extra:Route("/post/{pid}/add-comment", requirements={"pid" = "\d+"}, name="_comments_add")
+	 * @extra:Route("/post/{pid}/add-comment", name="_comments_add", requirements={"pid" = "\d+"})
 	 * @extra:Template()
 	 */
 	public function addAction($pid) {
@@ -65,16 +65,20 @@ class CommentsController extends Controller {
 	}
 	
 	/**
-	 * @extra:Route("/post/{pid}/comment/{cid}/edit", requirements={"pid" = "\d+", "cid" = "\d+"}, name="_comments_edit")
+	 * @extra:Route("/post/{pid}/comment/{cid}/edit", name="_comments_edit", requirements={"pid" = "\d+", "cid" = "\d+"})
 	 * @extra:Template()
 	 */
 	public function editAction($pid, $cid) {
 		$em = $this->getEm();
 		$comment = $em->find('Blog\\WebBundle\\Entity\\Comments', $cid);
-		// not found
+		
 		if (!$comment) {
 			throw ExceptionController::notFound('The comment does not exist.');
 		}
+		if (!$comment->canEdit($this->getUser())) {
+			throw ExceptionController::forbiden();
+		}
+		
 		$form = CommentsAddForm::create($this->get('form.context'), 'comments_edit');
 		
 		$form->bind($this->get('request'), $comment);
@@ -90,15 +94,19 @@ class CommentsController extends Controller {
 	}
 	
 	/**
-	 * @extra:Route("/post/{pid}/comment/{cid}/delete", requirements={"pid" = "\d+", "cid" = "\d+"}, name="_comments_delete")
+	 * @extra:Route("/post/{pid}/comment/{cid}/delete", name="_comments_delete", requirements={"pid" = "\d+", "cid" = "\d+"})
 	 */
 	public function deleteAction($pid, $cid) {
 		$em = $this->getEm();
 		$comment = $em->find('Blog\\WebBundle\\Entity\\Comments', $cid);
-		// not found
+		
 		if (!$comment) {
 			throw ExceptionController::notFound('The comment does not exist.');
 		}
+		if (!$comment->canDelete($this->getUser())) {
+			throw ExceptionController::forbiden();
+		}
+		
 		$em->remove($comment);
 		$em->flush();
 		

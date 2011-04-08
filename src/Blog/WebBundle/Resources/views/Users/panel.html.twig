@@ -1,4 +1,4 @@
-{% if currentUser is defined %}
+{% if currentUser %}
 	{% block userPanel %}
 		<div id="userPanel">
 			Hi, <strong><a href="{{ path('_users_show', {'uid': currentUser.id}) }}">{{ currentUser }}</a></strong>

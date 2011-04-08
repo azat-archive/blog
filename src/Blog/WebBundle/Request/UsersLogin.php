@@ -31,9 +31,11 @@ class UsersLogin {
 	 * Set email
 	 *
 	 * @param string $email
+	 * @return UsersLogin
 	 */
 	public function setEmail($email) {
 		$this->email = $email;
+		return $this;
 	}
 
 	/**
@@ -49,9 +51,11 @@ class UsersLogin {
 	 * Set password
 	 *
 	 * @param string $password
+	 * @return UsersLogin
 	 */
 	public function setPassword($password) {
 		$this->password = $password;
+		return $this;
 	}
 
 	/**

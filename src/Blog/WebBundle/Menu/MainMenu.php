@@ -67,7 +67,7 @@ class MainMenu extends Menu {
 			$this->addChild('Posts', $this->router->generate('_posts', array('page' => $currentPage)));
 			$this['Posts']->addChild('Add posts', $this->router->generate('_posts_add'));
 
-			$this->addChild('Logout', '/logout'); // @TODO generate url dynamicly
+			$this->addChild('Logout', $this->router->generate('_users_security_logout'));
 		}
 	}
 }

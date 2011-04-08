@@ -11,6 +11,7 @@
 			{% endif %}
 		</div>
 		<div class="actions">
+			<a href="{{ path('_posts_users', { 'uid': user.id }) }}">Posts</a>
 			{% if user.canEdit(currentUser) %}
 			<a href="{{ path('_users_edit', { 'uid': user.id }) }}">Edit</a>
 			{% endif %}

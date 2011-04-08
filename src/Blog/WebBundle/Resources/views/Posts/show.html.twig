@@ -5,7 +5,7 @@
 		<a name="pid_{{ post.id }}"></a>
 		<h4 class="title">{{ post|nl2br }}</h4>
 		<p class="content">{{ post.content|nl2br }}</p>
-		<p class="author">{{ post.user }}</p>
+		<p class="author"><a href="{{ path('_users_show', {'uid': post.uid}) }}">{{ post.user }}</a></p>
 
 		<div class="meta">
 			<span class="create">Create: <strong>{{ post.createTime|date }}</strong></span>

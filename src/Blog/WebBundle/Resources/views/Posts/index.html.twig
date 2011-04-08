@@ -6,9 +6,8 @@
 		<div class="post">
 			<a name="pid_{{ post.id }}"></a>
 			<a class="title" href="{{ path('_posts_show', { 'pid': post.id }) }}">{{ post }}</a>
-			{# @todo add substr method #}
 			<p class="content">{{ post.content|truncate(250)|nl2br }}</p>
-			<p class="author">{{ post.user }}</p>
+			<p class="author"><a href="{{ path('_users_show', {'uid': post.uid}) }}">{{ post.user }}</a></p>
 
 			<div class="meta">
 				<span class="create">Create: <strong>{{ post.createTime|date }}</strong></span>

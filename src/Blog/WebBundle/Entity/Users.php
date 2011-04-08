@@ -4,6 +4,7 @@ namespace Blog\WebBundle\Entity;
 
 use	Symfony\Component\Security\Core\User\UserInterface,
 	Symfony\Component\Security\Core\Role\Role,
+	Symfony\Component\DependencyInjection\Container,
 	Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 use	Blog\WebBundle\ACL\SimpleACL,
@@ -275,17 +276,20 @@ class Users implements Entity, UserInterface, SimpleACL {
 	
 	/**
 	 * Tranform password
-	 * @todo dynamic algoritm from settings
+	 * 
+	 * @see /app/config/security.yml - encoders
 	 *
-	 * @param string $password
-	 * @return Blog\WebBundle\Entity\Posts
+	 * @param Container $container
+	 * @return Users
 	 */
-	public function transformPassword() {
+	public function transformPassword(Container $container) {
 		$password = $this->getPassword();
 		if (!$password) {
 			throw new \Exception('"password" can`t be empty');
 		}
-		$encoder = new MessageDigestPasswordEncoder('sha1');
+		$encoders = $container->get('security.encoder_factory');
+		$encoder = $encoders->getEncoder($this);
+		
 		$this->setPassword($encoder->encodePassword($password, $this->getSalt()));
 		return $this;
 	}

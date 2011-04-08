@@ -23,7 +23,7 @@ use	Blog\WebBundle\Form\UsersSignup as UsersSignupForm,
 
 class UsersController extends Controller {
       /**
-	 * @extra:Route("/user/{uid}", requirements={"uid" = "\d+"}, name="_users_show")
+	 * @extra:Route("/user/{uid}", name="_users_show", requirements={"uid" = "\d+"})
 	 * @extra:Template()
 	 */
 	public function showAction($uid) {
@@ -34,16 +34,25 @@ class UsersController extends Controller {
 			throw ExceptionController::notFound('The user does not exist.');
 		}
 		
-		$this->addTitle('Posts', $user);
+		$this->addTitle('Users', $user);
 		return array('user' => $user);
 	}
 	
 	/**
-	 * @extra:Route("/user/{uid}/edit", name="_users_edit")
+	 * @extra:Route("/user/{uid}/edit", name="_users_edit", requirements={"uid" = "\d+"})
 	 * @extra:Template()
 	 */
 	public function editAction($uid) {
-		$user = $this->getUser();
+		$em = $this->getEm();
+		$user = $em->find('Blog\\WebBundle\\Entity\\Users', $uid);
+		
+		if (!$user) {
+			throw ExceptionController::notFound('The user does not exist.');
+		}
+		if (!$user->canEdit($this->getUser())) {
+			throw ExceptionController::forbiden();
+		}
+		
 		$form = UsersEditForm::create($this->get('form.context'), 'users_edit');
 		
 		$userRequest = new UsersEditRequest();
@@ -57,25 +66,34 @@ class UsersController extends Controller {
 			     ->setLogin($userRequest->getLogin())
 			     ->setSecondName($userRequest->getSecondName());
 			
-			$em = $this->getEm();
 			$em->persist($user);
 			$em->flush();
 			
 			return $this->redirectGenerate('_users_show', array('uid' => $user->getId()));
 		}
 		
+		$this->addTitle('Users', 'Edit', $user);
 		return array('form' => $form);
 	}
 	
 	/**
-	 * @extra:Route("/users/{uid}/delete", name="_users_delete")
+	 * @extra:Route("/users/{uid}/delete", name="_users_delete", requirements={"uid" = "\d+"})
 	 */
 	public function deleteAction($uid) {
 		$em = $this->getEm();
+		$user = $em->find('Blog\\WebBundle\\Entity\\Users', $uid);
+		
+		if (!$user) {
+			throw ExceptionController::notFound('The user does not exist.');
+		}
+		if (!$user->canDelete($this->getUser())) {
+			throw ExceptionController::forbiden();
+		}
+		
 		$em->remove($user);
 		$em->flush();
 		
-		return $this->redirectGenerate('_security_logout');
+		return $this->redirectGenerate('_users_security_logout');
 	}
 	
 	/**
@@ -88,7 +106,7 @@ class UsersController extends Controller {
 
 		$form->bind($this->get('request'), $user);
 		if ($form->isValid()) {
-			$user->transformPassword();
+			$user->transformPassword($this->container);
 			
 			$em = $this->getEm();
 			// check is user with such emails exists
@@ -133,14 +151,18 @@ class UsersController extends Controller {
 	}
 	
 	/**
-	 * @extra:Route("/login_check", name="_security_check")
+	 * @extra:Route("/login_check", name="_users_security_login_check")
+	 * 
+	 * @see /app/config/security.yml - check_path
 	 */
 	public function securityCheckAction() {
 		// The security layer will intercept this request
 	}
 
 	/**
-	 * @extra:Route("/logout", name="_security_logout")
+	 * @extra:Route("/logout", name="_users_security_logout")
+	 * 
+	 * @see /app/config/security.yml - logout
 	 */
 	public function securityLogoutAction() {
 		// The security layer will intercept this request
