@@ -3,6 +3,23 @@ Simple blog using symfony 2.0 DEV
 
 What's inside?
 --------------
+Simple blog symfony bundle, with posts, comments, users
+
+What Symfony2 components used:
+--------------
+* Dotrine ORM
+* Entity
+* Form (Assert)
+* Controller
+* View
+* Template helper
+* Twig extension
+* User interface via SecurityBundle
+
+External libraries:
+--------------
+* PaginatorBundle - https://github.com/knplabs/PaginatorBundle
+* MenuBundle - https://github.com/knplabs/MenuBundle
 
 Configuration
 -------------

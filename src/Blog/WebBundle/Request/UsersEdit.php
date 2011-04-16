@@ -29,7 +29,7 @@ class UsersEdit {
 	 * @var string $secondName
 	 *
 	 * @orm:Column(name="second_name", type="string", length=255, nullable=false)
-	 * @validation:NotBlank()
+	 * @assert:NotBlank()
 	 */
 	private $secondName;
 
