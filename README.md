@@ -16,7 +16,7 @@ What Symfony2 components used:
 * Twig extension
 * User interface via SecurityBundle
 
-External libraries:
+External bundles:
 --------------
 * PaginatorBundle - https://github.com/knplabs/PaginatorBundle
 * MenuBundle - https://github.com/knplabs/MenuBundle
