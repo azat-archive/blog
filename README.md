@@ -1,6 +1,8 @@
 Simple blog using symfony 2.0 DEV
 ========================
 
+`Works only this this version of symfony - https://github.com/azat/symfony/tree/For_blog`
+
 What's inside?
 --------------
 Simple blog symfony bundle, with posts, comments, users
